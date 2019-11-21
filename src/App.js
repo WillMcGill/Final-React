@@ -27,7 +27,6 @@ class App extends React.Component {
   getTokenFromChild(token, page) {
     this.setState({ token: token,
                     page: page   })
-                    console.log('triggered',this.state)
   }
 
   render(){
@@ -42,7 +41,7 @@ class App extends React.Component {
 
         {this.state.page != 0 ?
         <>
-        <Navbar getState = {this.getTokenFromChild} />
+        <Navbar getState = {this.getTokenFromChild} token={this.state.token}/>
         <Home />
 
         </>
