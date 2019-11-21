@@ -7,6 +7,7 @@ import Login from './Login'
 import axios from 'axios'
 import Home from './Home'
 import Navbar from './Navbar'
+import Register from './Register'
 
 
 class App extends React.Component {
@@ -18,9 +19,7 @@ class App extends React.Component {
       token: '',
       page: 0
     }
-    this.emailData = '';
 
-    // this.apiPull = this.apiPull.bind(this);
     this.getTokenFromChild = this.getTokenFromChild.bind(this);
   }
 
@@ -54,6 +53,12 @@ class App extends React.Component {
         <Home  page={this.state.page}/>
         </>
         : null}
+
+        {this.state.page === 3 ?
+        <>
+        <Register getState = {this.getTokenFromChild} token={this.state.token} page={this.state.page} isLogin={this.getTokenFromChild}/>
+        </>
+        : null} 
       </div>
           );
         }

@@ -5,11 +5,10 @@ class Navbar extends React.Component {
 
     constructor(props) {
         super(props);
-        this.NavItems = [
-            { name: "Logout", URL: '#', target: '_SELF' }
-        ]
+        
         this.logOut = this.logOut.bind(this)
         this.logIn = this.logIn.bind(this)
+        this.regNewUser = this.regNewUser.bind(this)
     }
     logOut() {
         const config = {
@@ -29,6 +28,10 @@ class Navbar extends React.Component {
         this.props.getState(this.props.token, 1)
     }
 
+    regNewUser(){
+        this.props.getState(this.props.token, 3)
+    }
+
     render() {
 
         return (
@@ -40,8 +43,7 @@ class Navbar extends React.Component {
                             {this.props.page === 0 ?
                             <>
                             <a className="nav-item nav-link" onClick={this.logIn}>Log In</a>
-                            <a className="nav-item nav-link" onClick={this.logOut}>Register</a>
-                            
+                            <a className="nav-item nav-link" onClick={this.regNewUser}>Register</a>
                             </>
                             : null}
 
