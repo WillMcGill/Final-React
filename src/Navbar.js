@@ -9,24 +9,24 @@ class Navbar extends React.Component {
             { name: "Logout", URL: '#', target: '_SELF' }
         ]
         this.logOut = this.logOut.bind(this)
+        this.logIn = this.logIn.bind(this)
     }
     logOut() {
         const config = {
             headers: {
                 'Authorization': "Bearer " +
                     this.props.token
-           
             }
-            
         }
-        console.log(config)
+
         axios.get('http://127.0.0.1:8000/api/logout', config)
             .then(res => {
-
                 localStorage.removeItem('token')
                 this.props.getState("", 0)
-                
             })
+    }
+    logIn(){
+        this.props.getState(this.props.token, 1)
     }
 
     render() {
@@ -36,7 +36,18 @@ class Navbar extends React.Component {
                 <nav className="navbar navbar-expand-lg navbar bg-light">
                     <ul className="navbar-nav ml-auto">
                         <ul className="navbar-nav mx-auto">
-                            <a className="nav-item nav-link" onClick={this.logOut}>Logout </a>
+
+                            {this.props.page === 0 ?
+                            <>
+                            <a className="nav-item nav-link" onClick={this.logIn}>Log In</a>
+                            <a className="nav-item nav-link" onClick={this.logOut}>Register</a>
+                            
+                            </>
+                            : null}
+
+                            {this.props.page !== 0 ?
+                            <a className="nav-item nav-link" onClick={this.logOut}>Logout</a>
+                            : null}
                         </ul>
                     </ul>
                 </nav>
@@ -46,4 +57,3 @@ class Navbar extends React.Component {
 }
 
 export default Navbar
-// ()=> this.props.getState("", 0)

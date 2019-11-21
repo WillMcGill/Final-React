@@ -35,7 +35,7 @@ class Login extends React.Component {
             .then(res => {
                 const tokenData = res.data;
                 localStorage.setItem('token' , tokenData.token)
-                this.props.isLogin(tokenData.token);
+                this.props.isLogin(tokenData.token, 2);
             })
 
     }

@@ -31,22 +31,29 @@ class App extends React.Component {
 
   render(){
 
-    // console.log(this.state)
+    
     return (
       <div className="App">
 
-        {this.state.page == 0  ? 
-        <Login isLogin={this.getTokenFromChild}/>
-        : null}
-
-        {this.state.page != 0 ?
+        {this.state.page === 0  ? 
         <>
-        <Navbar getState = {this.getTokenFromChild} token={this.state.token}/>
-        <Home />
-
+        <Navbar getState = {this.getTokenFromChild} token={this.state.token} page={this.state.page}/>
+        <Home  page={this.state.page}/>
         </>
         : null}
-        
+
+        {this.state.page === 1 ?
+        <>
+        <Login isLogin={this.getTokenFromChild}/>
+        </>
+        : null}
+
+        {this.state.page === 2 ?
+        <>
+        <Navbar getState = {this.getTokenFromChild} token={this.state.token} page={this.state.page}/>
+        <Home  page={this.state.page}/>
+        </>
+        : null}
       </div>
           );
         }

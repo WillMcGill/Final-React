@@ -1,12 +1,26 @@
 import React from 'react';
 import Axios from 'axios';
 
-class Home extends React.Component{
+class Home extends React.Component {
 
-    render(){
-        return(
+    constructor(props) {
+        super(props)
+    }
+
+    render() {
+        return (
             <>
-            Logged into Home
+                {this.props.page === 0 ?
+                    <>
+                        Not Logged In Home Page
+                    </>
+                    : null}
+
+                {this.props.page !== 0 ?
+                    <>
+                        Logged In Home Page
+                    </>
+                    : null}
             </>
         )
     }
