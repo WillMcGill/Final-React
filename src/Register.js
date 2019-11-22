@@ -19,7 +19,6 @@ class Register extends React.Component{
         const value = target.value;
         const name = target.name;
 
-
         this.setState({
             [name]:value
         });
@@ -27,7 +26,6 @@ class Register extends React.Component{
 
     handleSubmit(event){
         event.preventDefault();
-
         var config = {
             headers: {'Access-Control-Allow-Origin': '*'}
         };
@@ -41,14 +39,9 @@ class Register extends React.Component{
 
             Axios.post('http://127.0.0.1:8000/api/login', this.state)
             .then(res => {
-                
-                
                 this.props.isLogin(localStorage.getItem('token'), 2);
             })
-
     }
-    
-    
     render(){
 
         
