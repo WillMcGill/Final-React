@@ -18,7 +18,7 @@ class App extends React.Component {
     super(props)
     this.state = {
       token: '',
-      page: 0
+      page: 3
     }
 
     this.getTokenFromChild = this.getTokenFromChild.bind(this);
