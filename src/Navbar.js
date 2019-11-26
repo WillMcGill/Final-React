@@ -5,7 +5,7 @@ class Navbar extends React.Component {
 
     constructor(props) {
         super(props);
-        
+
         this.logOut = this.logOut.bind(this)
         this.logIn = this.logIn.bind(this)
         this.regNewUser = this.regNewUser.bind(this)
@@ -24,11 +24,11 @@ class Navbar extends React.Component {
                 this.props.getState("", 0)
             })
     }
-    logIn(){
+    logIn() {
         this.props.getState(this.props.token, 1)
     }
 
-    regNewUser(){
+    regNewUser() {
         this.props.getState(this.props.token, 3)
     }
 
@@ -36,20 +36,24 @@ class Navbar extends React.Component {
 
         return (
             <>
-                <nav className="navbar navbar-expand-lg navbar bg-light">
+                <nav className="navbar navbar-expand-lg bg-light">
                     <ul className="navbar-nav ml-auto">
-                        <ul className="navbar-nav mx-auto">
+                        
+                            
+                            <div className="collapse navbar-collapse" id="navbarSupportedContent" />
+                            <ul className="navbar-nav mx-auto">
 
                             {this.props.page === 0 ?
-                            <>
-                            <a className="nav-item nav-link" onClick={this.logIn}>Log In</a>
-                            <a className="nav-item nav-link" onClick={this.regNewUser}>Register</a>
-                            </>
-                            : null}
+                                <>
+
+                                    <a className="nav-item nav-link" onClick={this.logIn}>Log In</a>
+                                    <a className="nav-item nav-link" onClick={this.regNewUser}>Register</a>
+                                </>
+                                : null}
 
                             {this.props.page !== 0 ?
-                            <a className="nav-item nav-link" onClick={this.logOut}>Logout</a>
-                            : null}
+                                <a className="nav-item nav-link" onClick={this.logOut}>Logout</a>
+                                : null}
                         </ul>
                     </ul>
                 </nav>
