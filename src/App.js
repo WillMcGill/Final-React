@@ -8,6 +8,7 @@ import axios from 'axios'
 import Home from './Home'
 import Navbar from './Navbar'
 import Register from './Register'
+import Admin from './Admin'
 
 
 class App extends React.Component {
@@ -55,6 +56,14 @@ class App extends React.Component {
         : null}
 
         {this.state.page === 3 ?
+        <>
+        <Navbar getState = {this.getTokenFromChild} token={this.state.token} page={this.state.page}/>
+        <Home  page={this.state.page}/>
+        <Admin />
+        </>
+        : null}
+
+        {this.state.page === 4 ?
         <>
         <Register getState = {this.getTokenFromChild} token={this.state.token} page={this.state.page} isLogin={this.getTokenFromChild}/>
         </>

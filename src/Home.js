@@ -12,10 +12,6 @@ class Home extends React.Component {
             URL: "./GymOverview2.png"
         }
         this.getActive = this.getActive.bind(this)
-
-
-
-
     }
     getActive() {
         //check localstorage first, if not in localstorage, run axios, else set state from localstorage
@@ -78,12 +74,10 @@ class Home extends React.Component {
         });
     }
 
-
-
     render() {
         return (
             <>
-                {this.props.page === 0 && this.state.routeData.length > 0 ?
+                {this.props.page <= 3 && this.state.routeData.length > 0 ?
                     <>
 
                         <ImageMapper src={this.state.URL} map={

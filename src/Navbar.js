@@ -29,7 +29,7 @@ class Navbar extends React.Component {
     }
 
     regNewUser() {
-        this.props.getState(this.props.token, 3)
+        this.props.getState(this.props.token, 4)
     }
 
     render() {
