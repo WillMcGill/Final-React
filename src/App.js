@@ -9,6 +9,7 @@ import Home from './Home'
 import Navbar from './Navbar'
 import Register from './Register'
 import Admin from './Admin'
+import Modal from './Modal'
 
 
 class App extends React.Component {
@@ -18,7 +19,7 @@ class App extends React.Component {
     super(props)
     this.state = {
       token: '',
-      page: 3
+      page: 2
     }
 
     this.getTokenFromChild = this.getTokenFromChild.bind(this);
@@ -44,7 +45,9 @@ class App extends React.Component {
 
         {this.state.page === 1 ?
         <>
+        <Navbar getState = {this.getTokenFromChild} token={this.state.token} page={this.state.page}/>
         <Login isLogin={this.getTokenFromChild}/>
+        
         </>
         : null}
 
@@ -52,6 +55,7 @@ class App extends React.Component {
         <>
         <Navbar getState = {this.getTokenFromChild} token={this.state.token} page={this.state.page}/>
         <Home  page={this.state.page}/>
+        <Admin />
         </>
         : null}
 
@@ -59,7 +63,7 @@ class App extends React.Component {
         <>
         <Navbar getState = {this.getTokenFromChild} token={this.state.token} page={this.state.page}/>
         <Home  page={this.state.page}/>
-        <Admin />
+        
         </>
         : null}
 

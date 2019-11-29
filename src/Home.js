@@ -9,9 +9,10 @@ class Home extends React.Component {
         this.state = {
             hoveredArea: '',
             routeData: [],
-            URL: "./GymOverview2.png"
+            URL: "./Gym3DOverview.png"
         }
         this.getActive = this.getActive.bind(this)
+        this.load = this.load.bind(this)
     }
     getActive() {
         //check localstorage first, if not in localstorage, run axios, else set state from localstorage
@@ -37,6 +38,7 @@ class Home extends React.Component {
                 area.coords
             )} !`
         });
+        console.log(area.name)
     }
 
     moveOnArea(area, evt) {
@@ -50,6 +52,7 @@ class Home extends React.Component {
 
     enterArea(area) {
         this.setState({ hoveredArea: area });
+        console.log(area.name)
     }
 
     leaveArea(area) {
@@ -64,7 +67,9 @@ class Home extends React.Component {
         const coords = { x: evt.nativeEvent.layerX, y: evt.nativeEvent.layerY };
         this.setState({
             msg: `You clicked on the image at coords ${JSON.stringify(coords)} !`
-        });
+        })
+        console.log(this.state.msg)
+        
     }
 
     moveOnImage(evt) {
@@ -78,7 +83,7 @@ class Home extends React.Component {
         return (
             <>
                 {this.props.page <= 3 && this.state.routeData.length > 0 ?
-                    <>
+                    <div className="w-100 center-content mx-auto">
 
                         <ImageMapper src={this.state.URL} map={
                             {
@@ -101,10 +106,9 @@ class Home extends React.Component {
                                 {this.state.hoveredArea && this.state.hoveredArea.name}
                             </span>
                         }
-                    </>
+                    </div>
                     : null}
 
-                {this.props.page !== 0 ? "Logged In Home Page" : null}
             </>
         )
     }
