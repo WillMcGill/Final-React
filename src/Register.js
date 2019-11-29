@@ -39,7 +39,7 @@ class Register extends React.Component{
 
             Axios.post('http://127.0.0.1:8000/api/login', this.state)
             .then(res => {
-                this.props.isLogin(localStorage.getItem('token'), 2);
+                this.props.isLogin(localStorage.getItem('token'), 3);
             })
     }
     render(){
