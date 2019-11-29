@@ -12,7 +12,8 @@ class Admin extends React.Component {
         this.state = {
             data: [],
             toggleModal: false,
-            currentEdit: null
+            currentEdit: null,
+            value: null,
         }
         this.toggle = this.toggle.bind(this)
         this.onClick = this.onClick.bind(this)
@@ -73,10 +74,7 @@ class Admin extends React.Component {
         });
 
 
-
         return (
-
-
             <>
                 <div>
 
@@ -93,13 +91,13 @@ class Admin extends React.Component {
                                 </Input>
                                 <Label for="exampleSelect">Difficulty</Label>
                                 <Input type="select" name="diff" id="exampleSelect" value={this.select}>
-                                    <option>5.7</option>
-                                    <option>5.8</option>
-                                    <option>5.9</option>
-                                    <option>5.10</option>
-                                    <option>5.11</option>
-                                    <option>5.12</option>
-                                    <option>5.13</option>
+                                    <option value="5.7">5.7</option>
+                                    <option value="5.8">5.8</option>
+                                    <option value="5.9">5.9</option>
+                                    <option value="5.10">5.10</option>
+                                    <option value="5.11">5.11</option>
+                                    <option value="5.12">5.12</option>
+                                    <option value="5.13">5.13</option>
                                 </Input>
                             </FormGroup>
                             </form>

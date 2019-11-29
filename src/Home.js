@@ -15,13 +15,18 @@ class Home extends React.Component {
         this.load = this.load.bind(this)
     }
     getActive() {
-        //check localstorage first, if not in localstorage, run axios, else set state from localstorage
+        if(!localStorage.routes){
         Axios.get('http://localhost:8000/api/show')
             .then(res => {
                 const data = res.data
                 localStorage.setItem('routes', JSON.stringify(data))
                 this.setState({ routeData: data })
-            })
+            })}
+
+            else{
+                this.setState({ routeData: JSON.parse(localStorage.routes)})
+            }
+
     }
 
     componentDidMount() {
