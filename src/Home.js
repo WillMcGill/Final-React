@@ -33,8 +33,17 @@ class Home extends React.Component {
 
     }
 
+    getComments(){
+        Axios.get('http://127.0.0.1:8000/api/comments/4')
+        .then(res =>{
+            const data = res.data
+            console.log ('get comments' , data.data);
+        })
+    }
+
     componentDidMount() {
         this.getActive();
+        this.getComments();
     }
 
     load() {

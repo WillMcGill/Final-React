@@ -1,15 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import Login from './Login'
-import axios from 'axios'
 import Home from './Home'
 import Navbar from './Navbar'
 import Register from './Register'
 import Admin from './Admin'
-import Modal from './Modal'
 
 
 class App extends React.Component {
@@ -23,6 +20,13 @@ class App extends React.Component {
     }
 
     this.getTokenFromChild = this.getTokenFromChild.bind(this);
+    this.clearRoutesNoToken = this.clearRoutesNoToken.bind(this);
+  }
+
+  clearRoutesNoToken(){
+    if (this.state.token == ''){
+      localStorage.removeItem('routes')
+    }
   }
 
   getTokenFromChild(token, page) {
@@ -30,6 +34,10 @@ class App extends React.Component {
       token: token,
       page: page
     })
+  }
+
+  componentDidMount(){
+    this.clearRoutesNoToken()
   }
 
   render() {
