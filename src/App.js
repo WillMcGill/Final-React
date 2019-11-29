@@ -19,62 +19,64 @@ class App extends React.Component {
     super(props)
     this.state = {
       token: '',
-      page: 2
+      page: 0
     }
 
     this.getTokenFromChild = this.getTokenFromChild.bind(this);
   }
 
   getTokenFromChild(token, page) {
-    this.setState({ token: token,
-                    page: page   })
+    this.setState({
+      token: token,
+      page: page
+    })
   }
 
-  render(){
+  render() {
 
-    
+
     return (
       <div className="App">
 
-        {this.state.page === 0  ? 
-        <>
-        <Navbar getState = {this.getTokenFromChild} token={this.state.token} page={this.state.page}/>
-        <Home  page={this.state.page}/>
-        </>
-        : null}
+        {this.state.page === 0 ?
+          <>
+            <Navbar getState={this.getTokenFromChild} token={this.state.token} page={this.state.page} />
+            <Home page={this.state.page} />
+          </>
+          : null}
 
         {this.state.page === 1 ?
-        <>
-        <Navbar getState = {this.getTokenFromChild} token={this.state.token} page={this.state.page}/>
-        <Login isLogin={this.getTokenFromChild}/>
-        
-        </>
-        : null}
+          <>
+            <Navbar getState={this.getTokenFromChild} token={this.state.token} page={this.state.page} />
+            <Login isLogin={this.getTokenFromChild} />
+          </>
+          : null}
 
         {this.state.page === 2 ?
-        <>
-        <Navbar getState = {this.getTokenFromChild} token={this.state.token} page={this.state.page}/>
-        <Home  page={this.state.page}/>
-        <Admin />
-        </>
-        : null}
+          <>
+            <Navbar getState={this.getTokenFromChild} token={this.state.token} page={this.state.page} />
+            <Register getState={this.getTokenFromChild} token={this.state.token} page={this.state.page} isLogin={this.getTokenFromChild} />
+          </>
+          : null}
 
         {this.state.page === 3 ?
-        <>
-        <Navbar getState = {this.getTokenFromChild} token={this.state.token} page={this.state.page}/>
-        <Home  page={this.state.page}/>
-        
-        </>
-        : null}
+          <>
+            <Navbar getState={this.getTokenFromChild} token={this.state.token} page={this.state.page} />
+            <Home page={this.state.page} />
+            <Admin />
+          </>
+          : null}
 
         {this.state.page === 4 ?
-        <>
-        <Register getState = {this.getTokenFromChild} token={this.state.token} page={this.state.page} isLogin={this.getTokenFromChild}/>
-        </>
-        : null} 
+          <>
+            <Navbar getState={this.getTokenFromChild} token={this.state.token} page={this.state.page} />
+            <Home page={this.state.page} />
+          </>
+          : null}
+
       </div>
-          );
-        }
+    );
   }
+}
 
 export default App;

@@ -1,5 +1,6 @@
 import React from 'react';
 import Axios from 'axios';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import ImageMapper from 'react-image-mapper';
 
 class Home extends React.Component {
@@ -9,23 +10,26 @@ class Home extends React.Component {
         this.state = {
             hoveredArea: '',
             routeData: [],
-            URL: "./Gym3DOverview.png"
+            URL: "./Gym3DOverview.png",
+            toggleModal: false
         }
         this.getActive = this.getActive.bind(this)
         this.load = this.load.bind(this)
+        this.toggle = this.toggle.bind(this)
     }
     getActive() {
-        if(!localStorage.routes){
-        Axios.get('http://localhost:8000/api/show')
-            .then(res => {
-                const data = res.data
-                localStorage.setItem('routes', JSON.stringify(data))
-                this.setState({ routeData: data })
-            })}
+        if (!localStorage.routes) {
+            Axios.get('http://localhost:8000/api/show')
+                .then(res => {
+                    const data = res.data
+                    localStorage.setItem('routes', JSON.stringify(data))
+                    this.setState({ routeData: data })
+                })
+        }
 
-            else{
-                this.setState({ routeData: JSON.parse(localStorage.routes)})
-            }
+        else {
+            this.setState({ routeData: JSON.parse(localStorage.routes) })
+        }
 
     }
 
@@ -43,7 +47,7 @@ class Home extends React.Component {
                 area.coords
             )} !`
         });
-        console.log(area.name)
+        this.toggle();
     }
 
     moveOnArea(area, evt) {
@@ -74,7 +78,7 @@ class Home extends React.Component {
             msg: `You clicked on the image at coords ${JSON.stringify(coords)} !`
         })
         console.log(this.state.msg)
-        
+
     }
 
     moveOnImage(evt) {
@@ -82,6 +86,10 @@ class Home extends React.Component {
         this.setState({
             moveMsg: `You moved on the image at coords ${JSON.stringify(coords)} !`
         });
+    }
+
+    toggle() {
+        this.setState({ toggleModal: !this.state.toggleModal });
     }
 
     render() {
@@ -113,7 +121,30 @@ class Home extends React.Component {
                         }
                     </div>
                     : null}
+                <div>
 
+                    <Modal centered isOpen={this.state.toggleModal} toggle={this.toggle} >
+                        <ModalHeader toggle={this.toggle}>Edit Route</ModalHeader>
+                        <ModalBody>
+                            <form>
+                                <FormGroup>
+                                    <Label for="exampleSelect">Type</Label>
+                                    <ModalBody>
+                                        Lead
+                                    </ModalBody>
+                                    <Label for="exampleSelect">Difficulty</Label>
+                                    <ModalBody>
+                                        <center>5.9</center>
+                                    </ModalBody>
+                                </FormGroup>
+                            </form>
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button color="primary" onClick={this.onClick}>Save New Route</Button>
+                            <Button color="danger" onClick={this.toggle}>Cancel</Button>
+                        </ModalFooter>
+                    </Modal>
+                </div>
             </>
         )
     }

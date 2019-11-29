@@ -30,7 +30,7 @@ class Navbar extends React.Component {
     }
 
     regNewUser() {
-        this.props.getState(this.props.token, 4)
+        this.props.getState(this.props.token, 2)
     }
 
     goHome(){
@@ -54,11 +54,15 @@ class Navbar extends React.Component {
                                     <a className="nav-item nav-link" onClick={this.logIn}>Log In</a>
                                     <a className="nav-item nav-link" onClick={this.regNewUser}>Register</a>
                                 </>
-                                : null}
+                            : null}
 
-                            {this.props.page !== 0 ?
+                            {this.props.page === 1 || this.props.page === 2 ?
+                                <a className="nav-item nav-link" onClick={this.goHome}>Home</a>
+                            : null}
+
+                            {this.props.page > 2 ?
                                 <a className="nav-item nav-link" onClick={this.logOut}>Logout</a>
-                                : null}
+                            : null}
                         </ul>
                     </ul>
                 </nav>
