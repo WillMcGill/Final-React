@@ -2,6 +2,7 @@ import React from 'react';
 import Axios from 'axios';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import ImageMapper from 'react-image-mapper';
+import { resetWarningCache } from 'prop-types';
 
 class Home extends React.Component {
 
@@ -11,6 +12,7 @@ class Home extends React.Component {
             hoveredArea: '',
             routeData: [],
             routeDetails: [],
+            currentComments:[],
             URL: "./Gym3DOverview.png",
             toggleModal: false
         }
@@ -40,24 +42,32 @@ class Home extends React.Component {
             .then(res =>{
                  let routeDetails = res.data;
                  this.setState({ routeDetails: routeDetails})
+                 console.log(this.state.routeDetails)
                 
             })
-
         
     }
 
-    getComments(){
-        Axios.get('http://127.0.0.1:8000/api/comments/4')
-        .then(res =>{
-            const data = res.data
-            console.log ('get comments' , data.data);
+    async getComments(){
+        
+
+        Axios.get('http://127.0.0.1:8000/api/comments/' + this.clickId)
+        .then( res =>{
+
+           
+            const data = res.data;
+            this.setState({currentComments: res.data});
+            // console.log ('get comments' , data.data);
+            // console.log(this.clickId);
+            // console.log(this.state.currentComments);
+            
         })
     }
 
     componentDidMount() {
         this.getActive();
-        this.getComments();
         this.getRouteDetails();
+        
     }
 
     load() {
@@ -70,6 +80,7 @@ class Home extends React.Component {
                 area.coords
             )} !`
         });
+        this.getComments();
         this.toggle();
         this.clickId = area.name;
         this.routeType = this.state.routeDetails[this.clickId - 1].type;
@@ -169,7 +180,7 @@ class Home extends React.Component {
                                     <ModalBody>
                                         <center>{this.routeSet}</center>
                                     </ModalBody>
-                                    <Label for="exampleSelect"><center>Take Down Date</center></Label>
+                                    <Label for="exampleSelect"><center>Tear Down Date</center></Label>
                                     <ModalBody>
                                         <center>{this.routeExpire}</center>
                                     </ModalBody>

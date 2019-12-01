@@ -40,25 +40,25 @@ class Admin extends React.Component {
         this.setState({ toggleModal: !this.state.toggleModal });
     }
 
-    onClick(event){
+    onClick(event) {
         console.log(this.state)
         this.toggle()
     }
 
-    handleChange(event){
+    handleChange(event) {
         console.log(event.value)
         const target = event.target;
         const value = target.value;
         const name = target.name;
 
         this.setState({
-            [name]:value
+            [name]: value
         });
     }
-    
+
 
     render() {
-     
+
         const tableData = this.state.data.map((item) => {
 
             return (
@@ -79,27 +79,27 @@ class Admin extends React.Component {
                 <div>
 
                     <Modal centered isOpen={this.state.toggleModal} toggle={this.toggle} >
-                        <ModalHeader toggle={this.toggle}>Edit Route</ModalHeader>
+                        <ModalHeader toggle={this.toggle}>Route Details</ModalHeader>
                         <ModalBody>
                             <form>
-                            <FormGroup>
-                                <Label for="exampleSelect">Type</Label>
-                                <Input type="select" name="type" id="exampleSelect" >
-                                    <option>Lead</option>
-                                    <option>Top Rope</option>
-                                    <option>Auto-Belay</option>
-                                </Input>
-                                <Label for="exampleSelect">Difficulty</Label>
-                                <Input type="select" name="diff" id="exampleSelect" value={this.select}>
-                                    <option value="5.7">5.7</option>
-                                    <option value="5.8">5.8</option>
-                                    <option value="5.9">5.9</option>
-                                    <option value="5.10">5.10</option>
-                                    <option value="5.11">5.11</option>
-                                    <option value="5.12">5.12</option>
-                                    <option value="5.13">5.13</option>
-                                </Input>
-                            </FormGroup>
+                                <FormGroup>
+                                    <Label for="exampleSelect">Type</Label>
+                                    <Input type="select" name="type" id="exampleSelect" >
+                                        <option>Lead</option>
+                                        <option>Top Rope</option>
+                                        <option>Auto-Belay</option>
+                                    </Input>
+                                    <Label for="exampleSelect">Difficulty</Label>
+                                    <Input type="select" name="diff" id="exampleSelect" value={this.select}>
+                                        <option value="5.7">5.7</option>
+                                        <option value="5.8">5.8</option>
+                                        <option value="5.9">5.9</option>
+                                        <option value="5.10">5.10</option>
+                                        <option value="5.11">5.11</option>
+                                        <option value="5.12">5.12</option>
+                                        <option value="5.13">5.13</option>
+                                    </Input>
+                                </FormGroup>
                             </form>
                         </ModalBody>
                         <ModalFooter>
@@ -109,26 +109,31 @@ class Admin extends React.Component {
                     </Modal>
                 </div>
                 <Pagination>
-                <table className="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">Wall Location</th>
-                            <th scope="col">Type</th>
-                            <th scope="col">Difficulty</th>
-                            <th scope="col">Set Date</th>
-                            <th scope="col">Expire Date</th>
-                            <th scope="col">Change Route</th>
-
-                        </tr>
-                    </thead>
+                    <table className="table table-striped">
                     
-                    <tbody>
-                        {tableData}
-                    </tbody>
-                    
+                        <thead>
+                            <tr>
+                                <th scope="col">Wall Location</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Difficulty</th>
+                                <th scope="col">Set Date</th>
+                                <th scope="col">Expire Date</th>
+                                <th scope="col">Change Route</th>
 
-                </table>
-                </Pagination>
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                        
+                            {tableData}
+                        
+                        </tbody>
+                        
+
+
+                    </table>
+                    </Pagination>
+                
 
             </>
         )
