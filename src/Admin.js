@@ -58,10 +58,7 @@ class Admin extends React.Component {
     
 
     render() {
-        // const sortData = this.state.data.sort(function(a,b){
-        //     return a.wall_location = b.wall_location
-        // })
-        // console.log(sortData);
+     
         const tableData = this.state.data.map((item) => {
 
             return (

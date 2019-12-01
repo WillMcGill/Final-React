@@ -31,13 +31,23 @@ class Login extends React.Component {
             headers: {'Access-Control-Allow-Origin': '*'}
         };
 
+        
+
         Axios.post('http://127.0.0.1:8000/api/login', this.state)
             .then(res => {
                 const tokenData = res.data;
                 localStorage.setItem('token' , tokenData.token)
                 this.props.isLogin(tokenData.token, 3);
+                
+                this.checkAdmin();
             })
+    }
 
+    checkAdmin(){
+        Axios.get('http://localhost:8000/api/currentuser')
+            .then(res =>{
+                console.log(res.data)
+            })
     }
 
     render(){

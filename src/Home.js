@@ -10,10 +10,12 @@ class Home extends React.Component {
         this.state = {
             hoveredArea: '',
             routeData: [],
+            routeDetails: [],
             URL: "./Gym3DOverview.png",
             toggleModal: false
         }
         this.getActive = this.getActive.bind(this)
+        this.getRouteDetails = this.getRouteDetails.bind(this)
         this.load = this.load.bind(this)
         this.toggle = this.toggle.bind(this)
     }
@@ -33,6 +35,17 @@ class Home extends React.Component {
 
     }
 
+    getRouteDetails(){
+         Axios.get('http://localhost:8000/api/active/')
+            .then(res =>{
+                 let routeDetails = res.data;
+                 this.setState({ routeDetails: routeDetails})
+                
+            })
+
+        
+    }
+
     getComments(){
         Axios.get('http://127.0.0.1:8000/api/comments/4')
         .then(res =>{
@@ -44,6 +57,7 @@ class Home extends React.Component {
     componentDidMount() {
         this.getActive();
         this.getComments();
+        this.getRouteDetails();
     }
 
     load() {
@@ -57,6 +71,11 @@ class Home extends React.Component {
             )} !`
         });
         this.toggle();
+        this.clickId = area.name;
+        this.routeType = this.state.routeDetails[this.clickId - 1].type;
+        this.routeDiff = this.state.routeDetails[this.clickId - 1].difficulty;
+        this.routeSet = this.state.routeDetails[this.clickId - 1].set_date;
+        this.routeExpire = this.state.routeDetails[this.clickId - 1].expire_date;
     }
 
     moveOnArea(area, evt) {
@@ -70,7 +89,6 @@ class Home extends React.Component {
 
     enterArea(area) {
         this.setState({ hoveredArea: area });
-        console.log(area.name)
     }
 
     leaveArea(area) {
@@ -105,6 +123,7 @@ class Home extends React.Component {
         return (
             <>
                 {this.props.page <= 3 && this.state.routeData.length > 0 ?
+                    <div className = "row">
                     <div className="w-100 center-content mx-auto">
 
                         <ImageMapper src={this.state.URL} map={
@@ -129,6 +148,7 @@ class Home extends React.Component {
                             </span>
                         }
                     </div>
+                    </div>
                     : null}
                 <div>
 
@@ -137,13 +157,21 @@ class Home extends React.Component {
                         <ModalBody>
                             <form>
                                 <FormGroup>
-                                    <Label for="exampleSelect">Type</Label>
+                                    <Label for="exampleSelect"><center>Type</center></Label>
                                     <ModalBody>
-                                        Lead
+                                    <center>{this.routeType}</center>
                                     </ModalBody>
-                                    <Label for="exampleSelect">Difficulty</Label>
+                                    <Label for="exampleSelect"><center>Difficulty</center></Label>
                                     <ModalBody>
-                                        <center>5.9</center>
+                                        <center>{this.routeDiff}</center>
+                                    </ModalBody>
+                                    <Label for="exampleSelect"><center>Set Date</center></Label>
+                                    <ModalBody>
+                                        <center>{this.routeSet}</center>
+                                    </ModalBody>
+                                    <Label for="exampleSelect"><center>Take Down Date</center></Label>
+                                    <ModalBody>
+                                        <center>{this.routeExpire}</center>
                                     </ModalBody>
                                 </FormGroup>
                             </form>

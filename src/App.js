@@ -57,6 +57,8 @@ class App extends React.Component {
           <>
             <Navbar getState={this.getTokenFromChild} token={this.state.token} page={this.state.page} />
             <Login isLogin={this.getTokenFromChild} />
+            <Register getState={this.getTokenFromChild} token={this.state.token} page={this.state.page} isLogin={this.getTokenFromChild} />
+
           </>
           : null}
 
