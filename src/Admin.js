@@ -58,18 +58,14 @@ class Admin extends React.Component {
 
     updateDatabase(){
 
-
         axios(
             { url: 'http://localhost:8000/api/update/' + this.state.current,
               method: 'post',
               data: { id: this.state.current,
-                        type: this.state.type,
+                      type: this.state.type,
                       diff: this.state.difficulty  
                     }
-                    
-
-            }
-                )
+            })
             .then(res => {
                 this.getAllRoutes();
             })

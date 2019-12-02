@@ -51,7 +51,22 @@ class UserView extends React.Component {
             this.setState({ current: item.wall_location }, console.log(this.state))
         }
 
-        else { console.log(this.state) }
+        else { this.updateComments() }
+    }
+
+    updateComments(){
+        axios(
+            { url: 'http://localhost:8000/api/rate/',
+              method: 'post',
+              data: { user: 5,
+                      route: this.state.current,
+                      comment: this.state.comment  ,
+                      rating: this.state.rating
+                    }
+            })
+            .then(res => {
+                console.log(res);
+            })
     }
 
     handleChange(event) {
