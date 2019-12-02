@@ -69,6 +69,15 @@ class Admin extends React.Component {
             .then(res => {
                 this.getAllRoutes();
             })
+
+        axios(
+            { url: 'http://localhost:8000/api/removecomments/',
+              method: 'post',
+              data: { id: this.state.current,
+                    
+                    }
+            }
+        )
             
         console.log(this.state)
 
