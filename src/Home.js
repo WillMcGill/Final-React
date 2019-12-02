@@ -57,10 +57,6 @@ class Home extends React.Component {
            
             const data = res.data;
             this.setState({currentComments: res.data});
-            // console.log ('get comments' , data.data);
-            // console.log(this.clickId);
-            // console.log(this.state.currentComments);
-            
         })
     }
 
@@ -133,6 +129,13 @@ class Home extends React.Component {
     render() {
         return (
             <>
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-2">Welcome to Sloper</h1>
+    <p class="lead">Click on the interactive map or leave comments below.</p>
+  </div>
+</div>
                 {this.props.page <= 3 && this.state.routeData.length > 0 ?
                     <div className = "row">
                     <div className="w-100 center-content mx-auto">
@@ -164,7 +167,7 @@ class Home extends React.Component {
                 <div>
 
                     <Modal centered isOpen={this.state.toggleModal} toggle={this.toggle} >
-                        <ModalHeader toggle={this.toggle}>Edit Route</ModalHeader>
+                        <ModalHeader toggle={this.toggle}>Route Details</ModalHeader>
                         <ModalBody>
                             <form>
                                 <FormGroup>
@@ -188,7 +191,6 @@ class Home extends React.Component {
                             </form>
                         </ModalBody>
                         <ModalFooter>
-                            <Button color="primary" onClick={this.onClick}>Save New Route</Button>
                             <Button color="danger" onClick={this.toggle}>Cancel</Button>
                         </ModalFooter>
                     </Modal>

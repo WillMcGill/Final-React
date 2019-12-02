@@ -36,8 +36,11 @@ class Login extends React.Component {
         Axios.post('http://127.0.0.1:8000/api/login', this.state)
             .then(res => {
                 const tokenData = res.data;
+                const admin = tokenData.user.admin;
+                console.log(admin);
                 localStorage.setItem('token' , tokenData.token)
-                this.props.isLogin(tokenData.token, 3);
+                this.props.isLogin(tokenData.token, 2 + admin);
+                // console.log(tokenData.user.admin)
                 
                 this.checkAdmin();
             })

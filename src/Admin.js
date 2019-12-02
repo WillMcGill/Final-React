@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import Pagination from 'react-bootstrap/Pagination'
+import "bootstrap/dist/css/bootstrap.min.css";
 
 
 class Admin extends React.Component {
@@ -13,7 +13,11 @@ class Admin extends React.Component {
             data: [],
             toggleModal: false,
             currentEdit: null,
-            value: null,
+            value: '',
+            difficulty: '5.7',
+            type: '',
+            name: '',
+            current: ''
         }
         this.toggle = this.toggle.bind(this)
         this.onClick = this.onClick.bind(this)
@@ -28,25 +32,26 @@ class Admin extends React.Component {
 
         axios.get('http://localhost:8000/api/active')
             .then(res => {
-                console.log(res.data)
                 this.setState(
                     { data: res.data }
                 )
-                console.log(this.state.data)
             })
     }
 
-    toggle() {
+    toggle(event, item = null) {
+        console.log(item);
         this.setState({ toggleModal: !this.state.toggleModal });
+        this.setState({ current: this.wall_location })
     }
 
     onClick(event) {
-        console.log(this.state)
         this.toggle()
+
+        console.log(event)
     }
 
     handleChange(event) {
-        console.log(event.value)
+
         const target = event.target;
         const value = target.value;
         const name = target.name;
@@ -54,6 +59,7 @@ class Admin extends React.Component {
         this.setState({
             [name]: value
         });
+
     }
 
 
@@ -68,7 +74,9 @@ class Admin extends React.Component {
                     <td>{item.difficulty}</td>
                     <td>{item.set_date}</td>
                     <td>{item.expire_date}</td>
-                    <td><button id={item.id} type="button" class="btn btn-danger" onClick={this.toggle}>Edit</button></td>
+                    <td><button id={item.id} type="button" class="btn btn-danger" onClick={
+                        e => this.toggle(e, item)
+                    }>Update Route</button></td>
                 </tr>
             )
         });
@@ -81,16 +89,19 @@ class Admin extends React.Component {
                     <Modal centered isOpen={this.state.toggleModal} toggle={this.toggle} >
                         <ModalHeader toggle={this.toggle}>Route Details</ModalHeader>
                         <ModalBody>
-                            <form>
-                                <FormGroup>
-                                    <Label for="exampleSelect">Type</Label>
-                                    <Input type="select" name="type" id="exampleSelect" >
-                                        <option>Lead</option>
-                                        <option>Top Rope</option>
-                                        <option>Auto-Belay</option>
-                                    </Input>
-                                    <Label for="exampleSelect">Difficulty</Label>
-                                    <Input type="select" name="diff" id="exampleSelect" value={this.select}>
+                            <form onSubmit={this.handleSubmit}>
+                                <label>
+                                    Set Route Type:
+                                        <select name="type" onChange={this.handleChange}>
+                                        <option value="Top Rope">Top Rope</option>
+                                        <option value="Lead">Lead</option>
+                                        <option value="Auto-belay">Auto-belay</option>
+                                    </select>
+
+                                </label>
+                                <label>
+                                    Set Route Difficulty:
+                                        <select name="difficulty" onChange={this.handleChange}>
                                         <option value="5.7">5.7</option>
                                         <option value="5.8">5.8</option>
                                         <option value="5.9">5.9</option>
@@ -98,42 +109,45 @@ class Admin extends React.Component {
                                         <option value="5.11">5.11</option>
                                         <option value="5.12">5.12</option>
                                         <option value="5.13">5.13</option>
-                                    </Input>
-                                </FormGroup>
+                                    </select>
+
+                                </label>
+                                {/* <input type="submit" value="Submit" /> */}
                             </form>
                         </ModalBody>
                         <ModalFooter>
                             <Button color="primary" onClick={this.onClick}>Save New Route</Button>
                             <Button color="danger" onClick={this.toggle}>Cancel</Button>
                         </ModalFooter>
+
                     </Modal>
                 </div>
-                <Pagination>
-                    <table className="table table-striped">
-                    
-                        <thead>
-                            <tr>
-                                <th scope="col">Wall Location</th>
-                                <th scope="col">Type</th>
-                                <th scope="col">Difficulty</th>
-                                <th scope="col">Set Date</th>
-                                <th scope="col">Expire Date</th>
-                                <th scope="col">Change Route</th>
 
-                            </tr>
-                        </thead>
-                        
-                        <tbody>
-                        
-                            {tableData}
-                        
-                        </tbody>
-                        
+                <table className="table table-striped">
+
+                    <thead>
+                        <tr>
+                            <th scope="col">Wall Location</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Difficulty</th>
+                            <th scope="col">Set Date</th>
+                            <th scope="col">Expire Date</th>
+                            <th scope="col">User Comments</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {tableData}
+
+                    </tbody>
 
 
-                    </table>
-                    </Pagination>
-                
+
+                </table>
+
+
 
             </>
         )
