@@ -22,6 +22,7 @@ class Navbar extends React.Component {
         axios.get('http://127.0.0.1:8000/api/logout', config)
             .then(res => {
                 localStorage.removeItem('token')
+                localStorage.removeItem('routes')
                 this.props.getState("", 0)
             })
     }
@@ -56,11 +57,7 @@ class Navbar extends React.Component {
                                 </>
                             : null}
 
-                            {this.props.page === 1 || this.props.page === 2 ?
-                                <a className="nav-item nav-link" onClick={this.goHome}>Home</a>
-                            : null}
-
-                            {this.props.page > 2 ?
+                            {this.props.page > 1 ?
                                 <a className="nav-item nav-link" onClick={this.logOut}>Logout</a>
                             : null}
                         </ul>

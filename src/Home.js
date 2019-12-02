@@ -133,7 +133,7 @@ class Home extends React.Component {
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
     <h1 class="display-2">Welcome to Sloper</h1>
-    <p class="lead">Click on the interactive map or leave comments below.</p>
+    <p class="lead">Click on the interactive map to view details or leave a rating below</p>
   </div>
 </div>
                 {this.props.page <= 3 && this.state.routeData.length > 0 ?

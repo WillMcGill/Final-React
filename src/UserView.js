@@ -15,6 +15,9 @@ class UserView extends React.Component {
             toggleModal: false,
             currentEdit: null,
             value: null,
+            current: '',
+            rating: '5',
+            comment: ''
         }
         this.toggle = this.toggle.bind(this)
         this.onClick = this.onClick.bind(this)
@@ -41,13 +44,18 @@ class UserView extends React.Component {
         this.setState({ toggleModal: !this.state.toggleModal });
     }
 
-    onClick(event) {
-        console.log(this.state)
+    onClick(event, item) {
         this.toggle()
+
+        if (item) {
+            this.setState({ current: item.wall_location }, console.log(this.state))
+        }
+
+        else { console.log(this.state) }
     }
 
     handleChange(event) {
-        console.log(event.value)
+        console.log(event)
         const target = event.target;
         const value = target.value;
         const name = target.name;
@@ -69,7 +77,7 @@ class UserView extends React.Component {
                     <td>{item.difficulty}</td>
                     <td>{item.set_date}</td>
                     <td>{item.expire_date}</td>
-                    <td><button id={item.id} type="button" class="btn btn-primary" onClick={this.toggle}>Add Comments</button></td>
+                    <td><button id={item.id} type="button" class="btn btn-primary" onClick={e => this.onClick(e, item)}>Rate This Route</button></td>
                 </tr>
             )
         });
@@ -82,21 +90,24 @@ class UserView extends React.Component {
                     <Modal centered isOpen={this.state.toggleModal} toggle={this.toggle} >
                         <ModalHeader toggle={this.toggle}>Tell Us What You Think</ModalHeader>
                         <ModalBody>
-                            <form>
-                                <FormGroup>
-                                    <Label for="exampleSelect">Leave A Comment</Label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                    <Label for="exampleSelect">Rate This Route</Label>
-                                    <Input type="select" name="diff" id="exampleSelect" value={this.select}>
-                                        <option value="1">1 Star</option>
-                                        <option value="2">2 Stars</option>
-                                        <option value="3">3 Stars</option>
-                                        <option value="4">4 Stars</option>
+                            <form onSubmit={this.handleSubmit}>
+
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Leave A Comment</label>
+                                    <textarea class="form-control"  rows="3" name="comment" onChange ={this.handleChange}></textarea>
+                                </div>
+                                <label>
+                                    Rate the Route:
+                                        <select name="rating" onChange={this.handleChange}>
                                         <option value="5">5 Stars</option>
-                                       
-                                    </Input>
-                                </FormGroup>
+                                        <option value="4">4 Star</option>
+                                        <option value="3">3 Star</option>
+                                        <option value="2">2 Star</option>
+                                        <option value="1">1 Star</option>
+                                    </select>
+                                </label>
                             </form>
+
                         </ModalBody>
                         <ModalFooter>
                             <Button color="primary" onClick={this.onClick}>Submit</Button>
@@ -106,7 +117,7 @@ class UserView extends React.Component {
                 </div>
                 <Pagination>
                     <table className="table table-striped">
-                    
+
                         <thead>
                             <tr>
                                 <th scope="col">Wall Location</th>
@@ -118,18 +129,18 @@ class UserView extends React.Component {
 
                             </tr>
                         </thead>
-                        
+
                         <tbody>
-                        
+
                             {tableData}
-                        
+
                         </tbody>
-                        
+
 
 
                     </table>
-                    </Pagination>
-                
+                </Pagination>
+
 
             </>
         )

@@ -37,12 +37,9 @@ class Login extends React.Component {
             .then(res => {
                 const tokenData = res.data;
                 const admin = tokenData.user.admin;
-                console.log(admin);
                 localStorage.setItem('token' , tokenData.token)
                 this.props.isLogin(tokenData.token, 2 + admin);
-                // console.log(tokenData.user.admin)
                 
-                this.checkAdmin();
             })
     }
 

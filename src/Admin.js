@@ -15,13 +15,14 @@ class Admin extends React.Component {
             currentEdit: null,
             value: '',
             difficulty: '5.7',
-            type: '',
+            type: 'Lead',
             name: '',
             current: ''
         }
         this.toggle = this.toggle.bind(this)
         this.onClick = this.onClick.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.updateDatabase = this.updateDatabase.bind(this)
     }
 
     componentDidMount() {
@@ -39,15 +40,42 @@ class Admin extends React.Component {
     }
 
     toggle(event, item = null) {
-        console.log(item);
+        
         this.setState({ toggleModal: !this.state.toggleModal });
-        this.setState({ current: this.wall_location })
     }
 
-    onClick(event) {
+    onClick(event , item) {
         this.toggle()
+        
+        if(item)
+        {
+            this.setState({current: item.wall_location}, console.log(this.state));
+            
+        }
+        else {this.updateDatabase()
+        }
+    }
 
-        console.log(event)
+    updateDatabase(){
+
+
+        axios(
+            { url: 'http://localhost:8000/api/update/' + this.state.current,
+              method: 'post',
+              data: { id: this.state.current,
+                        type: this.state.type,
+                      diff: this.state.difficulty  
+                    }
+                    
+
+            }
+                )
+            .then(res => {
+                this.getAllRoutes();
+            })
+            
+        console.log(this.state)
+
     }
 
     handleChange(event) {
@@ -75,7 +103,7 @@ class Admin extends React.Component {
                     <td>{item.set_date}</td>
                     <td>{item.expire_date}</td>
                     <td><button id={item.id} type="button" class="btn btn-danger" onClick={
-                        e => this.toggle(e, item)
+                        e => this.onClick(e, item)
                     }>Update Route</button></td>
                 </tr>
             )
@@ -132,7 +160,7 @@ class Admin extends React.Component {
                             <th scope="col">Difficulty</th>
                             <th scope="col">Set Date</th>
                             <th scope="col">Expire Date</th>
-                            <th scope="col">User Comments</th>
+                            <th scope="col">Edit Route</th>
 
                         </tr>
                     </thead>

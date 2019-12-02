@@ -18,6 +18,7 @@ class App extends React.Component {
     this.state = {
       token: '',
       page: 0
+      
     }
 
     this.getTokenFromChild = this.getTokenFromChild.bind(this);
@@ -25,6 +26,8 @@ class App extends React.Component {
   }
 
   clearRoutesNoToken(){
+    
+
     if (this.state.token == ''){
       localStorage.removeItem('routes')
     }
@@ -41,6 +44,8 @@ class App extends React.Component {
     this.clearRoutesNoToken()
   }
 
+  
+
   render() {
 
 
@@ -51,12 +56,12 @@ class App extends React.Component {
 
         {this.state.page === 0 ?
           <>
-            <Navbar getState={this.getTokenFromChild} token={this.state.token} page={this.state.page} />
             <Login isLogin={this.getTokenFromChild} />
             <Register getState={this.getTokenFromChild} token={this.state.token} page={this.state.page} isLogin={this.getTokenFromChild} />
-
           </>
           : null}
+
+       
 
         {this.state.page === 2 ?
           <>
@@ -70,14 +75,7 @@ class App extends React.Component {
           <>
             <Navbar getState={this.getTokenFromChild} token={this.state.token} page={this.state.page} />
             <Home page={this.state.page} />
-            <Admin />
-          </>
-          : null}
-
-        {this.state.page === 4 ?
-          <>
-            <Navbar getState={this.getTokenFromChild} token={this.state.token} page={this.state.page} />
-            <Home page={this.state.page} />
+            <Admin  />
           </>
           : null}
 
