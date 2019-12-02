@@ -65,7 +65,6 @@ class UserView extends React.Component {
                     }
             })
             .then(res => {
-                console.log(res);
             })
     }
 
