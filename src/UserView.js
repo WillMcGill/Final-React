@@ -58,7 +58,7 @@ class UserView extends React.Component {
         axios(
             { url: 'http://localhost:8000/api/rate/',
               method: 'post',
-              data: { user: 5,
+              data: { user: localStorage.getItem('user_id'),
                       route: this.state.current,
                       comment: this.state.comment  ,
                       rating: this.state.rating
