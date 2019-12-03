@@ -15,7 +15,7 @@ class Admin extends React.Component {
             currentEdit: null,
             value: '',
             difficulty: '5.7',
-            type: 'Lead',
+            type: 'Top Rope',
             name: '',
             current: ''
         }
@@ -40,7 +40,6 @@ class Admin extends React.Component {
     }
 
     toggle(event, item = null) {
-        
         this.setState({ toggleModal: !this.state.toggleModal });
     }
 
@@ -49,10 +48,11 @@ class Admin extends React.Component {
         
         if(item)
         {
-            this.setState({current: item.wall_location}, console.log(this.state));
-            
+        this.setState({current: item.wall_location}, console.log(this.state));
+        
         }
         else {this.updateDatabase()
+            this.props.getRenderCallFromAdmin("something");
         }
     }
 
@@ -73,14 +73,10 @@ class Admin extends React.Component {
         axios(
             { url: 'http://localhost:8000/api/removecomments/',
               method: 'post',
-              data: { id: this.state.current,
-                    
+              data: { 
+                    id: this.state.current,
                     }
-            }
-        )
-            
-        console.log(this.state)
-
+            })
     }
 
     handleChange(event) {
@@ -125,7 +121,7 @@ class Admin extends React.Component {
                             <form onSubmit={this.handleSubmit}>
                                 <label>
                                     Set Route Type:
-                                        <select name="type" onChange={this.handleChange}>
+                                    <select name="type" onChange={this.handleChange}>
                                         <option value="Top Rope">Top Rope</option>
                                         <option value="Lead">Lead</option>
                                         <option value="Auto-belay">Auto-belay</option>
@@ -134,7 +130,7 @@ class Admin extends React.Component {
                                 </label>
                                 <label>
                                     Set Route Difficulty:
-                                        <select name="difficulty" onChange={this.handleChange}>
+                                    <select name="difficulty" onChange={this.handleChange}>
                                         <option value="5.7">5.7</option>
                                         <option value="5.8">5.8</option>
                                         <option value="5.9">5.9</option>
@@ -143,10 +139,9 @@ class Admin extends React.Component {
                                         <option value="5.12">5.12</option>
                                         <option value="5.13">5.13</option>
                                     </select>
-
                                 </label>
-                                {/* <input type="submit" value="Submit" /> */}
                             </form>
+                        
                         </ModalBody>
                         <ModalFooter>
                             <Button color="primary" onClick={this.onClick}>Save New Route</Button>
@@ -171,17 +166,9 @@ class Admin extends React.Component {
                     </thead>
 
                     <tbody>
-
                         {tableData}
-
                     </tbody>
-
-
-
                 </table>
-
-
-
             </>
         )
     }

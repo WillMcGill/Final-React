@@ -3,8 +3,6 @@ import Axios from 'axios';
 
 class Register extends React.Component{
 
-    
-    
     constructor(props){
         super(props)
         this.handleChange = this.handleChange.bind(this);
@@ -26,20 +24,17 @@ class Register extends React.Component{
 
     handleSubmit(event){
         event.preventDefault();
-        var config = {
-            headers: {'Access-Control-Allow-Origin': '*'}
-        };
+        
 
         Axios.post('http://127.0.0.1:8000/api/register', this.state)
             .then(res => {
                 const tokenData = res.data;
                 localStorage.setItem('token' ,tokenData.token)
-                console.log(res.data)
             })
 
             Axios.post('http://127.0.0.1:8000/api/login', this.state)
-            .then(res => {
-                this.props.isLogin(localStorage.getItem('token'), 3);
+                .then(res => {
+                    this.props.isLogin(localStorage.getItem('token'), 3);
             })
     }
     render(){
@@ -53,22 +48,22 @@ class Register extends React.Component{
 
                     <div className="form-group">
                         <label for="exampleInputEmail1">Name
-                        <input type="name" name = 'name' className="form-control" id="nameExample" aria-describedby="nameHelp" placeholder="Enter name" onChange={this.handleChange} />
+                            <input type="name" name = 'name' className="form-control" id="nameExample" aria-describedby="nameHelp" placeholder="Enter name" onChange={this.handleChange} />
                         </label>
                     </div>
 
                     <div className="form-group">
                         <label for="exampleInputEmail1">Email address
-                        <input type="email" name = 'email' className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" onChange={this.handleChange} />
+                            <input type="email" name = 'email' className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" onChange={this.handleChange} />
                         </label>
                     </div>
 
                     <div className="form-group">
-                            <label for="exampleInputPassword1">Password
+                        <label for="exampleInputPassword1">Password
                             <input type="password" name = 'password' className="form-control" id="exampleInputPassword1" placeholder="Password" onChange={this.handleChange} />
-                            </label>
+                        </label>
                     </div>
-                            <button type="submit" className="btn btn-primary" onSubmit={this.registerUser}>Submit</button>
+                        <button type="submit" className="btn btn-primary" onSubmit={this.registerUser}>Submit</button>
                 </form>
             </div>
             </>

@@ -37,38 +37,43 @@ class Login extends React.Component {
             .then(res => {
                 const tokenData = res.data;
                 const admin = tokenData.user.admin;
-                localStorage.setItem('token' , tokenData.token)
                 this.props.isLogin(tokenData.token, 2 + admin);
+                
+                localStorage.setItem('token' , tokenData.token)
                 localStorage.setItem('user_id', tokenData.user.id);
                 
             })
     }
 
-    checkAdmin(){
-        Axios.get('http://localhost:8000/api/currentuser')
-            .then(res =>{
-                console.log(res.data)
-            })
+    removeUserIdFromLocal(){
+
+       if(localStorage.getItem('user_id')){
+           localStorage.removeItem('user_id')
+       }
+
     }
 
+    componentDidMount(){
+        this.removeUserIdFromLocal();
+    }
     render(){
         return (
-            <div>
+            <div style ={{backgroundColor: 'white'}}>
                 <form onSubmit={this.handleSubmit}>
                     <h1>Login</h1>
 
                     <div className="form-group">
                         <label for="exampleInputEmail1">Email address
-                        <input type="email" name = 'email' className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" onChange={this.handleChange} />
+                            <input type="email" name = 'email' className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" onChange={this.handleChange} />
                         </label>
                     </div>
 
                     <div className="form-group">
-                            <label for="exampleInputPassword1">Password
+                        <label for="exampleInputPassword1">Password
                             <input type="password" name = 'password' className="form-control" id="exampleInputPassword1" placeholder="Password" onChange={this.handleChange} />
-                            </label>
+                        </label>
                     </div>
-                            <button type="submit" className="btn btn-primary" onSubmit={this.handleSubmit}>Submit</button>
+                        <button type="submit" className="btn btn-primary" onSubmit={this.handleSubmit}>Submit</button>
                 </form>
             </div>
                         )

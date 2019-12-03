@@ -17,19 +17,19 @@ class App extends React.Component {
     super(props)
     this.state = {
       token: '',
-      page: 0
+      page: 0,
+      render: 0
       
     }
 
     this.getTokenFromChild = this.getTokenFromChild.bind(this);
     this.clearRoutesNoToken = this.clearRoutesNoToken.bind(this);
+    this.getRenderCallFromAdmin = this.getRenderCallFromAdmin.bind(this)
   }
 
   clearRoutesNoToken(){
-    
-
     if (this.state.token == ''){
-      localStorage.removeItem('routes')
+        localStorage.removeItem('routes')
     }
   }
 
@@ -44,22 +44,32 @@ class App extends React.Component {
     this.clearRoutesNoToken()
   }
 
+  getRenderCallFromAdmin(renderCall){
+    setTimeout(this.setState({render: this.state.render + 1}), 1500)
+    // setTimeout(this.setState({render: this.state.render + 0}), 1500)
+    console.log(this.state.render)
+  }
+
   render() {
 
 
     return (
       <div className="App">
 
-       
-
         {this.state.page === 0 ?
-          <>
-            <Login isLogin={this.getTokenFromChild} />
-            <Register getState={this.getTokenFromChild} token={this.state.token} page={this.state.page} isLogin={this.getTokenFromChild} />
+          <><div className = "jumbotron h-100">
+            <div className = "row">
+              <div className = "col card">
+                <Login isLogin={this.getTokenFromChild} />
+              </div>
+            
+              <div className = "col">
+                <Register getState={this.getTokenFromChild} token={this.state.token} page={this.state.page} isLogin={this.getTokenFromChild} />
+              </div>
+            </div>
+            </div>
           </>
           : null}
-
-       
 
         {this.state.page === 2 ?
           <>
@@ -72,11 +82,10 @@ class App extends React.Component {
         {this.state.page === 3 ?
           <>
             <Navbar getState={this.getTokenFromChild} token={this.state.token} page={this.state.page} />
-            <Home page={this.state.page} />
-            <Admin  />
+            <Home page={this.state.page} render={this.state.render}/>
+            <Admin   getRenderCallFromAdmin={this.getRenderCallFromAdmin}/>
           </>
           : null}
-
       </div>
     );
   }

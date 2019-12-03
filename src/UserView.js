@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import Pagination from 'react-bootstrap/Pagination'
 import "bootstrap/dist/css/bootstrap.min.css";
 
 
@@ -32,11 +31,9 @@ class UserView extends React.Component {
 
         axios.get('http://localhost:8000/api/active')
             .then(res => {
-                console.log(res.data)
                 this.setState(
                     { data: res.data }
                 )
-                console.log(this.state.data)
             })
     }
 
@@ -79,7 +76,6 @@ class UserView extends React.Component {
         });
     }
 
-
     render() {
 
         const tableData = this.state.data.map((item) => {
@@ -108,11 +104,11 @@ class UserView extends React.Component {
 
                                 <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Leave A Comment</label>
-                                    <textarea class="form-control"  rows="3" name="comment" onChange ={this.handleChange}></textarea>
+                                        <textarea class="form-control"  rows="3" name="comment" onChange ={this.handleChange}></textarea>
                                 </div>
                                 <label>
                                     Rate the Route:
-                                        <select name="rating" onChange={this.handleChange}>
+                                    <select name="rating" onChange={this.handleChange}>
                                         <option value="5">5 Stars</option>
                                         <option value="4">4 Star</option>
                                         <option value="3">3 Star</option>
@@ -129,9 +125,8 @@ class UserView extends React.Component {
                         </ModalFooter>
                     </Modal>
                 </div>
-                <Pagination>
                     <table className="table table-striped">
-
+                        
                         <thead>
                             <tr>
                                 <th scope="col">Wall Location</th>
@@ -140,22 +135,14 @@ class UserView extends React.Component {
                                 <th scope="col">Set Date</th>
                                 <th scope="col">Expire Date</th>
                                 <th scope="col">User Comments</th>
-
                             </tr>
                         </thead>
 
                         <tbody>
-
                             {tableData}
-
                         </tbody>
 
-
-
                     </table>
-                </Pagination>
-
-
             </>
         )
     }

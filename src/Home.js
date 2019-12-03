@@ -12,63 +12,75 @@ class Home extends React.Component {
             hoveredArea: '',
             routeData: [],
             routeDetails: [],
-            currentComments:[],
+            currentComments: [],
             URL: "./Gym3DOverview.png",
-            toggleModal: false
+            toggleModal: false,
+            tableData: null,
+            render: 0
         }
         this.getActive = this.getActive.bind(this)
         this.getRouteDetails = this.getRouteDetails.bind(this)
-        this.load = this.load.bind(this)
+        // this.load = this.load.bind(this)
         this.toggle = this.toggle.bind(this)
+        this.autoUpdate = this.autoUpdate.bind(this)
     }
     getActive() {
-        if (!localStorage.routes) {
-            Axios.get('http://localhost:8000/api/show')
-                .then(res => {
-                    const data = res.data
-                    localStorage.setItem('routes', JSON.stringify(data))
-                    this.setState({ routeData: data })
-                })
-        }
-
-        else {
-            this.setState({ routeData: JSON.parse(localStorage.routes) })
-        }
-
-    }
-
-    getRouteDetails(){
-         Axios.get('http://localhost:8000/api/active/')
-            .then(res =>{
-                 let routeDetails = res.data;
-                 this.setState({ routeDetails: routeDetails})
-                 console.log(this.state.routeDetails)
-                
+        // if (!localStorage.routes) {
+        Axios.get('http://localhost:8000/api/show')
+            .then(res => {
+                const data = res.data
+                localStorage.setItem('routes', JSON.stringify(data))
+                this.setState({ routeData: data })
             })
-        
+
+        console.log('get active')
     }
 
-    async getComments(){
-        
+    // else {
+    //     this.setState({ routeData: JSON.parse(localStorage.routes) })
+    // }
 
-        Axios.get('http://127.0.0.1:8000/api/comments/' + this.clickId)
-        .then( res =>{
+    // }
 
-           
-            const data = res.data;
-            this.setState({currentComments: res.data});
-        })
+    getRouteDetails() {
+        Axios.get('http://localhost:8000/api/active/')
+            .then(res => {
+                let routeDetails = res.data;
+                this.setState({ routeDetails: routeDetails })
+                console.log('get route details')
+            })
+
     }
+    getComments = async () => {
+        let res = await Axios.get('http://127.0.0.1:8000/api/comments/' + this.clickId);
+        let data = res.data;
+        this.setState({ currentComments: data });
+        const commentTable = this.state.currentComments.data.map((item) => {
+            console.log(item);
+            return (
+                <tr>
+                    <td>{item.comments}</td>
+                    <td>{item.rating}</td>
+                </tr>
+            )
+        });
+
+        this.setState({ tableData: <tbody>{commentTable}</tbody> });
+
+    };
 
     componentDidMount() {
         this.getActive();
         this.getRouteDetails();
-        
     }
 
-    load() {
-        this.setState({ msg: "Interact with image !" });
+    componentDidUpdate() {
+
     }
+
+    // load() {
+    //     this.setState({ msg: "Interact with image !" });
+    // }
 
     clicked(area) {
         this.setState({
@@ -76,13 +88,15 @@ class Home extends React.Component {
                 area.coords
             )} !`
         });
-        this.getComments();
+
         this.toggle();
         this.clickId = area.name;
         this.routeType = this.state.routeDetails[this.clickId - 1].type;
         this.routeDiff = this.state.routeDetails[this.clickId - 1].difficulty;
         this.routeSet = this.state.routeDetails[this.clickId - 1].set_date;
         this.routeExpire = this.state.routeDetails[this.clickId - 1].expire_date;
+        this.getComments();
+
     }
 
     moveOnArea(area, evt) {
@@ -110,9 +124,8 @@ class Home extends React.Component {
         const coords = { x: evt.nativeEvent.layerX, y: evt.nativeEvent.layerY };
         this.setState({
             msg: `You clicked on the image at coords ${JSON.stringify(coords)} !`
-        })
-        console.log(this.state.msg)
 
+        })
     }
 
     moveOnImage(evt) {
@@ -125,43 +138,57 @@ class Home extends React.Component {
     toggle() {
         this.setState({ toggleModal: !this.state.toggleModal });
     }
+    autoUpdate() {
+        setTimeout(() => {
+            this.setState({ render: this.props.render })
+            console.log("timeout first")
+            this.getActive();
+            this.getRouteDetails();
+        }, 1000)
 
+
+        return (
+            <>
+            </>
+        )
+    }
     render() {
         return (
             <>
 
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-2">Welcome to Sloper</h1>
-    <p class="lead">Click on the interactive map to view details or leave a rating below</p>
-  </div>
-</div>
-                {this.props.page <= 3 && this.state.routeData.length > 0 ?
-                    <div className = "row">
-                    <div className="w-100 center-content mx-auto">
-
-                        <ImageMapper src={this.state.URL} map={
-                            {
-                                name: "my-map",
-                                areas: this.state.routeData
-                            }
-                        } width={1000}
-                            onLoad={() => this.load()}
-                            onClick={area => this.clicked(area)}
-                            onMouseEnter={area => this.enterArea(area)}
-                            onMouseLeave={area => this.leaveArea(area)}
-                            onMouseMove={(area, _, evt) => this.moveOnArea(area, evt)}
-                            onImageClick={evt => this.clickedOutside(evt)}
-                            onImageMouseMove={evt => this.moveOnImage(evt)}
-                        />
-                        {
-                            this.state.hoveredArea &&
-                            <span className="tooltip"
-                                style={{ ...this.getTipPosition(this.state.hoveredArea) }}>
-                                {this.state.hoveredArea && this.state.hoveredArea.name}
-                            </span>
-                        }
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h1 class="display-2">Welcome to Sloper</h1>
+                        <p class="lead">Click on the interactive map to view details or leave a comment below</p>
                     </div>
+                </div>
+                {this.props.render > this.state.render ? this.autoUpdate() : null}
+                {this.props.page <= 3 && this.state.routeData.length > 0 ?
+                    <div className="row">
+                        <div className="w-100 center-content mx-auto">
+
+                            <ImageMapper src={this.state.URL} map={
+                                {
+                                    name: "my-map",
+                                    areas: this.state.routeData
+                                }
+                            } width={1000}
+                                // onLoad={() => this.load()}
+                                onClick={area => this.clicked(area)}
+                                onMouseEnter={area => this.enterArea(area)}
+                                onMouseLeave={area => this.leaveArea(area)}
+                                onMouseMove={(area, _, evt) => this.moveOnArea(area, evt)}
+                                onImageClick={evt => this.clickedOutside(evt)}
+                                onImageMouseMove={evt => this.moveOnImage(evt)}
+                            />
+                            {
+                                this.state.hoveredArea &&
+                                <span className="tooltip"
+                                    style={{ ...this.getTipPosition(this.state.hoveredArea) }}>
+                                    {this.state.hoveredArea && this.state.hoveredArea.name}
+                                </span>
+                            }
+                        </div>
                     </div>
                     : null}
                 <div>
@@ -173,7 +200,7 @@ class Home extends React.Component {
                                 <FormGroup>
                                     <Label for="exampleSelect"><center>Type</center></Label>
                                     <ModalBody>
-                                    <center>{this.routeType}</center>
+                                        <center>{this.routeType}</center>
                                     </ModalBody>
                                     <Label for="exampleSelect"><center>Difficulty</center></Label>
                                     <ModalBody>
@@ -186,6 +213,12 @@ class Home extends React.Component {
                                     <Label for="exampleSelect"><center>Tear Down Date</center></Label>
                                     <ModalBody>
                                         <center>{this.routeExpire}</center>
+                                    </ModalBody>
+                                    <Label for="exampleSelect"><center>User Comments</center></Label>
+                                    <ModalBody>
+                                        <table>
+                                        {this.state.tableData}
+                                        </table>
                                     </ModalBody>
                                 </FormGroup>
                             </form>
