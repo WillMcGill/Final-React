@@ -194,7 +194,7 @@ class Home extends React.Component {
                 <div>
 
                     <Modal centered isOpen={this.state.toggleModal} toggle={this.toggle} >
-                        <ModalHeader toggle={this.toggle}>Route Details</ModalHeader>
+                        <ModalHeader toggle={this.toggle}>Route Details At Position {this.clickId}</ModalHeader>
                         <ModalBody>
                             <form>
                                 <FormGroup>
@@ -216,7 +216,13 @@ class Home extends React.Component {
                                     </ModalBody>
                                     <Label for="exampleSelect"><center>User Comments</center></Label>
                                     <ModalBody>
-                                        <table>
+                                        <table className = "table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Comment</th>
+                                                    <th>Rating</th>
+                                                </tr>
+                                            </thead>
                                         {this.state.tableData}
                                         </table>
                                     </ModalBody>
