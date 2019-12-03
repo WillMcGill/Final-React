@@ -26,13 +26,13 @@ class Register extends React.Component{
         event.preventDefault();
         
 
-        Axios.post('http://127.0.0.1:8000/api/register', this.state)
+        Axios.post('https://sloper.appspot.com/api/register', this.state)
             .then(res => {
                 const tokenData = res.data;
                 localStorage.setItem('token' ,tokenData.token)
             })
 
-            Axios.post('http://127.0.0.1:8000/api/login', this.state)
+            Axios.post('https://sloper.appspot.com/api/login', this.state)
                 .then(res => {
                     this.props.isLogin(localStorage.getItem('token'), 3);
             })

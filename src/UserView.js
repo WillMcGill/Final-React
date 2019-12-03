@@ -29,7 +29,7 @@ class UserView extends React.Component {
 
     getAllRoutes() {
 
-        axios.get('http://localhost:8000/api/active')
+        axios.get('https://sloper.appspot.com/api/active')
             .then(res => {
                 this.setState(
                     { data: res.data }
@@ -53,7 +53,7 @@ class UserView extends React.Component {
 
     updateComments(){
         axios(
-            { url: 'http://localhost:8000/api/rate/',
+            { url: 'https://sloper.appspot.com/api/rate/',
               method: 'post',
               data: { user: localStorage.getItem('user_id'),
                       route: this.state.current,

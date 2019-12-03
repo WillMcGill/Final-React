@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css?family=Domine:700&display=swap');
+
 .App {
   text-align: center;
   /* background-image: url("/ClimbingGym.jpg"); */
@@ -29,4 +32,24 @@
 
 #overview{
   width: 100vw;
+}
+
+#homebackground{
+  background-image: url("/background.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  
+}
+
+#homecard{
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+}
+
+#homebanner{
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  font-family: 'Domine', serif;
 }

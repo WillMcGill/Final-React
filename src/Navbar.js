@@ -19,7 +19,7 @@ class Navbar extends React.Component {
             }
         }
 
-        axios.get('http://127.0.0.1:8000/api/logout', config)
+        axios.get('https://sloper.appspot.com/api/logout', config)
             .then(res => {
                 localStorage.removeItem('token')
                 localStorage.removeItem('routes')

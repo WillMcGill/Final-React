@@ -31,7 +31,7 @@ class Admin extends React.Component {
 
     getAllRoutes() {
 
-        axios.get('http://localhost:8000/api/active')
+        axios.get('https://sloper.appspot.com/api/active')
             .then(res => {
                 this.setState(
                     { data: res.data }
@@ -59,7 +59,7 @@ class Admin extends React.Component {
     updateDatabase(){
 
         axios(
-            { url: 'http://localhost:8000/api/update/' + this.state.current,
+            { url: 'https://sloper.appspot.com/api/update/' + this.state.current,
               method: 'post',
               data: { id: this.state.current,
                       type: this.state.type,
@@ -71,7 +71,7 @@ class Admin extends React.Component {
             })
 
         axios(
-            { url: 'http://localhost:8000/api/removecomments/',
+            { url: 'https://sloper.appspot.com/api/removecomments/',
               method: 'post',
               data: { 
                     id: this.state.current,

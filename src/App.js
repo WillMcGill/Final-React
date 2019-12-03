@@ -10,6 +10,7 @@ import Admin from './Admin'
 import UserView from './UserView'
 
 
+
 class App extends React.Component {
 
 
@@ -57,13 +58,20 @@ class App extends React.Component {
       <div className="App">
 
         {this.state.page === 0 ?
-          <><div className = "jumbotron h-100">
-            <div className = "row">
-              <div className = "col card">
+          <><div className = "jumbotron h-100" id = "homebackground">
+            <div class="jumbotron jumbotron-fluid p-2 w-50 mx-auto" id = "homebanner">
+                    <div class="container">
+                        <h1 class="display-2">Sloper</h1>
+                        <p class="lead">Indoor Climbing Route Management</p>
+                        <p>Login or Register to Continue</p>
+                    </div>
+                </div>
+            <div className = "row d-flex">
+              <div className = "card p-5 mx-auto mt-5" id="homecard">
                 <Login isLogin={this.getTokenFromChild} />
               </div>
             
-              <div className = "col">
+              <div className = "card p-5 mx-auto mt-5" id ="homecard">
                 <Register getState={this.getTokenFromChild} token={this.state.token} page={this.state.page} isLogin={this.getTokenFromChild} />
               </div>
             </div>

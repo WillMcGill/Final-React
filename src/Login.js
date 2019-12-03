@@ -33,7 +33,7 @@ class Login extends React.Component {
 
         
 
-        Axios.post('http://127.0.0.1:8000/api/login', this.state)
+        Axios.post('https://sloper.appspot.com/api/login', this.state)
             .then(res => {
                 const tokenData = res.data;
                 const admin = tokenData.user.admin;
@@ -58,7 +58,7 @@ class Login extends React.Component {
     }
     render(){
         return (
-            <div style ={{backgroundColor: 'white'}}>
+            <div>
                 <form onSubmit={this.handleSubmit}>
                     <h1>Login</h1>
 

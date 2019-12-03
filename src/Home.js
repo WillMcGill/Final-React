@@ -26,7 +26,7 @@ class Home extends React.Component {
     }
     getActive() {
         // if (!localStorage.routes) {
-        Axios.get('http://localhost:8000/api/show')
+        Axios.get('https://sloper.appspot.com/api/show')
             .then(res => {
                 const data = res.data
                 localStorage.setItem('routes', JSON.stringify(data))
@@ -43,7 +43,7 @@ class Home extends React.Component {
     // }
 
     getRouteDetails() {
-        Axios.get('http://localhost:8000/api/active/')
+        Axios.get('https://sloper.appspot.com/api/active/')
             .then(res => {
                 let routeDetails = res.data;
                 this.setState({ routeDetails: routeDetails })
@@ -52,7 +52,7 @@ class Home extends React.Component {
 
     }
     getComments = async () => {
-        let res = await Axios.get('http://127.0.0.1:8000/api/comments/' + this.clickId);
+        let res = await Axios.get('https://sloper.appspot.com/api/comments/' + this.clickId);
         let data = res.data;
         this.setState({ currentComments: data });
         const commentTable = this.state.currentComments.data.map((item) => {
