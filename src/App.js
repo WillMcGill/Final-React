@@ -47,7 +47,6 @@ class App extends React.Component {
 
   getRenderCallFromAdmin(renderCall){
     setTimeout(this.setState({render: this.state.render + 1}), 1500)
-    // setTimeout(this.setState({render: this.state.render + 0}), 1500)
     console.log(this.state.render)
   }
 
@@ -58,20 +57,20 @@ class App extends React.Component {
       <div className="App">
 
         {this.state.page === 0 ?
-          <><div className = "jumbotron h-100" id = "homebackground">
-            <div class="jumbotron jumbotron-fluid p-2 w-50 mx-auto" id = "homebanner">
+          <><div className = "jumbotron h-100" id = "appbackground">
+            <div class="jumbotron jumbotron-fluid p-2 w-50 mx-auto" id = "appbanner">
                     <div class="container">
-                        <h1 class="display-2">Sloper</h1>
+                        <h1 class="display-3">Sloper</h1>
                         <p class="lead">Indoor Climbing Route Management</p>
                         <p>Login or Register to Continue</p>
                     </div>
                 </div>
             <div className = "row d-flex">
-              <div className = "card p-5 mx-auto mt-5" id="homecard">
+              <div className = "card p-2 mx-auto mt-5 mb-5" id="appcard">
                 <Login isLogin={this.getTokenFromChild} />
               </div>
             
-              <div className = "card p-5 mx-auto mt-5" id ="homecard">
+              <div className = "card p-2 mx-auto mt-5 mb-5" id ="appcard">
                 <Register getState={this.getTokenFromChild} token={this.state.token} page={this.state.page} isLogin={this.getTokenFromChild} />
               </div>
             </div>

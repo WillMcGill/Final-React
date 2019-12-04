@@ -9,6 +9,7 @@
   background-size: cover;
   background-attachment: fixed;
   height: 100vh;
+  /* background-color: #E9ECEF */
 }
 
 .App-logo {
@@ -34,22 +35,39 @@
   width: 100vw;
 }
 
-#homebackground{
+#appbackground{
   background-image: url("/background.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
   height: 100vh;
   
 }
 
-#homecard{
+#appcard{
   background-color: rgba(0,0,0,0.5);
   color: white;
 }
 
-#homebanner{
+#appbanner{
   background-color: rgba(0,0,0,0.5);
   color: white;
   font-family: 'Domine', serif;
 }
+
+#homebanner{
+  font-family: 'Domine', serif;
+  background-image: url('/holds.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+
+}
+
+#routeTable{
+  overflow: auto;
+}
+
+

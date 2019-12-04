@@ -34,7 +34,7 @@ class Register extends React.Component{
 
             Axios.post('https://sloper.appspot.com/api/login', this.state)
                 .then(res => {
-                    this.props.isLogin(localStorage.getItem('token'), 3);
+                    this.props.isLogin(localStorage.getItem('token'), 2);
             })
     }
     render(){

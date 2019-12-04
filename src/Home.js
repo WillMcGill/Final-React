@@ -1,5 +1,6 @@
 import React from 'react';
 import Axios from 'axios';
+import './App.css';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import ImageMapper from 'react-image-mapper';
 import { resetWarningCache } from 'prop-types';
@@ -35,12 +36,6 @@ class Home extends React.Component {
 
         console.log('get active')
     }
-
-    // else {
-    //     this.setState({ routeData: JSON.parse(localStorage.routes) })
-    // }
-
-    // }
 
     getRouteDetails() {
         Axios.get('https://sloper.appspot.com/api/active/')
@@ -78,9 +73,6 @@ class Home extends React.Component {
 
     }
 
-    // load() {
-    //     this.setState({ msg: "Interact with image !" });
-    // }
 
     clicked(area) {
         this.setState({
@@ -156,16 +148,18 @@ class Home extends React.Component {
         return (
             <>
 
-                <div class="jumbotron jumbotron-fluid">
+                <div class="jumbotron jumbotron-fluid h-20" id = "homebanner">
                     <div class="container">
-                        <h1 class="display-2">Welcome to Sloper</h1>
+                        <h1 class="display-3">Welcome to Sloper</h1>
                         <p class="lead">Click on the interactive map to view details or leave a comment below</p>
                     </div>
                 </div>
                 {this.props.render > this.state.render ? this.autoUpdate() : null}
                 {this.props.page <= 3 && this.state.routeData.length > 0 ?
+                    
                     <div className="row">
-                        <div className="w-100 center-content mx-auto">
+                        <div className="mx-auto">
+
 
                             <ImageMapper src={this.state.URL} map={
                                 {
@@ -173,7 +167,6 @@ class Home extends React.Component {
                                     areas: this.state.routeData
                                 }
                             } width={1000}
-                                // onLoad={() => this.load()}
                                 onClick={area => this.clicked(area)}
                                 onMouseEnter={area => this.enterArea(area)}
                                 onMouseLeave={area => this.leaveArea(area)}
@@ -181,6 +174,8 @@ class Home extends React.Component {
                                 onImageClick={evt => this.clickedOutside(evt)}
                                 onImageMouseMove={evt => this.moveOnImage(evt)}
                             />
+
+                            </div>
                             {
                                 this.state.hoveredArea &&
                                 <span className="tooltip"
@@ -188,8 +183,9 @@ class Home extends React.Component {
                                     {this.state.hoveredArea && this.state.hoveredArea.name}
                                 </span>
                             }
+                            
                         </div>
-                    </div>
+                    
                     : null}
                 <div>
 

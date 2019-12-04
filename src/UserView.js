@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import './App.css';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -125,8 +126,9 @@ class UserView extends React.Component {
                         </ModalFooter>
                     </Modal>
                 </div>
+                    
+                    <div className = "row ml-3 mr-3 mh-50" id = "routeTable">
                     <table className="table table-striped">
-                        
                         <thead>
                             <tr>
                                 <th scope="col">Wall Location</th>
@@ -143,6 +145,7 @@ class UserView extends React.Component {
                         </tbody>
 
                     </table>
+                    </div>
             </>
         )
     }

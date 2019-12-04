@@ -151,7 +151,7 @@ class Admin extends React.Component {
                     </Modal>
                 </div>
 
-                <table className="table table-striped">
+                <table className="table table-striped ml-3 mr-3">
 
                     <thead>
                         <tr>
