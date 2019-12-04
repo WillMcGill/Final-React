@@ -21,12 +21,10 @@ class Home extends React.Component {
         }
         this.getActive = this.getActive.bind(this)
         this.getRouteDetails = this.getRouteDetails.bind(this)
-        // this.load = this.load.bind(this)
         this.toggle = this.toggle.bind(this)
         this.autoUpdate = this.autoUpdate.bind(this)
     }
     getActive() {
-        // if (!localStorage.routes) {
         Axios.get('https://sloper.appspot.com/api/show')
             .then(res => {
                 const data = res.data
@@ -34,7 +32,6 @@ class Home extends React.Component {
                 this.setState({ routeData: data })
             })
 
-        console.log('get active')
     }
 
     getRouteDetails() {
@@ -42,7 +39,6 @@ class Home extends React.Component {
             .then(res => {
                 let routeDetails = res.data;
                 this.setState({ routeDetails: routeDetails })
-                console.log('get route details')
             })
 
     }
@@ -51,7 +47,6 @@ class Home extends React.Component {
         let data = res.data;
         this.setState({ currentComments: data });
         const commentTable = this.state.currentComments.data.map((item) => {
-            console.log(item);
             return (
                 <tr>
                     <td>{item.comments}</td>

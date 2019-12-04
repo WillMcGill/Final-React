@@ -47,7 +47,6 @@ class App extends React.Component {
 
   getRenderCallFromAdmin(renderCall){
     setTimeout(this.setState({render: this.state.render + 1}), 1500)
-    console.log(this.state.render)
   }
 
   render() {
