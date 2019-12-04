@@ -1,26 +1,100 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
+import Login from './Login'
+import Home from './Home'
+import Navbar from './Navbar'
+import Register from './Register'
+import Admin from './Admin'
+import UserView from './UserView'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+class App extends React.Component {
+
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      token: '',
+      page: 0,
+      render: 0
+      
+    }
+
+    this.getTokenFromChild = this.getTokenFromChild.bind(this);
+    this.clearRoutesNoToken = this.clearRoutesNoToken.bind(this);
+    this.getRenderCallFromAdmin = this.getRenderCallFromAdmin.bind(this)
+  }
+
+  clearRoutesNoToken(){
+    if (this.state.token === ''){
+        localStorage.removeItem('routes')
+    }
+  }
+
+  getTokenFromChild(token, page) {
+    this.setState({
+      token: token,
+      page: page
+    })
+  }
+
+  componentDidMount(){
+    this.clearRoutesNoToken()
+  }
+
+  getRenderCallFromAdmin(renderCall){
+    setTimeout(this.setState({render: this.state.render + 1}), 1500)
+  }
+
+  render() {
+
+
+    return (
+      <div className="App">
+
+        {this.state.page === 0 ?
+          <><div className = "jumbotron h-100" id = "appbackground">
+            <div className="jumbotron jumbotron-fluid p-2 w-50 mx-auto" id = "appbanner">
+                    <div className="container">
+                        <h1 className="display-3">Sloper</h1>
+                        <p className="lead">Indoor Climbing Route Management</p>
+                        <p>Login or Register to Continue</p>
+                    </div>
+                </div>
+            <div className = "row d-flex">
+              <div className = "card p-2 mx-auto mt-5 mb-5" id="appcard">
+                <Login isLogin={this.getTokenFromChild} />
+              </div>
+            
+              <div className = "card p-2 mx-auto mt-5 mb-5" id ="appcard">
+                <Register getState={this.getTokenFromChild} token={this.state.token} page={this.state.page} isLogin={this.getTokenFromChild} />
+              </div>
+            </div>
+            </div>
+          </>
+          : null}
+
+        {this.state.page === 2 ?
+          <>
+            <Navbar getState={this.getTokenFromChild} token={this.state.token} page={this.state.page} />
+            <Home page={this.state.page} />            
+            <UserView />
+          </>
+          : null}
+
+        {this.state.page === 3 ?
+          <>
+            <Navbar getState={this.getTokenFromChild} token={this.state.token} page={this.state.page} />
+            <Home page={this.state.page} render={this.state.render}/>
+            <Admin   getRenderCallFromAdmin={this.getRenderCallFromAdmin}/>
+          </>
+          : null}
+      </div>
+    );
+  }
 }
 
 export default App;

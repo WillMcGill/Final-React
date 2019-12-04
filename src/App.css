@@ -1,5 +1,15 @@
+
+@import url('https://fonts.googleapis.com/css?family=Domine:700&display=swap');
+
 .App {
   text-align: center;
+  /* background-image: url("/ClimbingGym.jpg"); */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 100vh;
+  /* background-color: #E9ECEF */
 }
 
 .App-logo {
@@ -20,3 +30,44 @@
 .App-link {
   color: #09d3ac;
 }
+
+#overview{
+  width: 100vw;
+}
+
+#appbackground{
+  background-image: url("/background.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 100vh;
+  
+}
+
+#appcard{
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+}
+
+#appbanner{
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  font-family: 'Domine', serif;
+}
+
+#homebanner{
+  font-family: 'Domine', serif;
+  background-image: url('/holds.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+
+}
+
+#routeTable{
+  overflow: auto;
+}
+
+
