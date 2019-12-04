@@ -4,7 +4,7 @@ import Axios from 'axios';
 class Login extends React.Component {
 
 
-    constructor(props){
+    constructor(props) {
         super(props)
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -13,67 +13,67 @@ class Login extends React.Component {
         }
     }
 
-    handleChange(event){
+    handleChange(event) {
         const target = event.target;
         const value = target.value;
         const name = target.name;
 
 
         this.setState({
-            [name]:value
+            [name]: value
         });
     }
 
-    handleSubmit(event){
+    handleSubmit(event) {
         event.preventDefault();
 
-        
+
 
         Axios.post('https://sloper.appspot.com/api/login', this.state)
             .then(res => {
                 const tokenData = res.data;
                 const admin = tokenData.user.admin;
                 this.props.isLogin(tokenData.token, 2 + admin);
-                
-                localStorage.setItem('token' , tokenData.token)
+
+                localStorage.setItem('token', tokenData.token)
                 localStorage.setItem('user_id', tokenData.user.id);
-                
+
             })
     }
 
-    removeUserIdFromLocal(){
+    removeUserIdFromLocal() {
 
-       if(localStorage.getItem('user_id')){
-           localStorage.removeItem('user_id')
-       }
+        if (localStorage.getItem('user_id')) {
+            localStorage.removeItem('user_id')
+        }
 
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.removeUserIdFromLocal();
     }
-    render(){
+    render() {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
                     <h1>Login</h1>
 
-                    <div className="form-group autocomplete">
+                    <div className="form-group ">
                         <label >Email address
-                            <input type="email" name = 'email' className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" onChange={this.handleChange} />
+                            <input type="email" autoComplete="off" name='email' className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" onChange={this.handleChange} />
                         </label>
                     </div>
 
-                    <div className="form-group autocomplete">
+                    <div className="form-group ">
                         <label >Password
-                            <input type="password" name = 'password' className="form-control" id="exampleInputPassword2" placeholder="Password" onChange={this.handleChange} />
+                            <input type="password" autoComplete="off" name='password' className="form-control" id="exampleInputPassword2" placeholder="Password" onChange={this.handleChange} />
                         </label>
                     </div>
-                        <button type="submit" className="btn btn-primary" onSubmit={this.handleSubmit}>Submit</button>
+                    <button type="submit" className="btn btn-primary" onSubmit={this.handleSubmit}>Submit</button>
                 </form>
             </div>
-                        )
-                    }
+        )
+    }
 }
 
 export default Login;

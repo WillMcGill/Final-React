@@ -58,7 +58,9 @@ class Navbar extends React.Component {
                             : null} */}
 
                             {this.props.page > 1 ?
-                                <a className="nav-item nav-link" onClick={this.logOut} href ="#">Logout</a>
+                                <span className="nav-item nav-link" onClick={this.logOut} 
+                                // href ="#"
+                                >Logout</span>
                             : null}
                         </ul>
                     </ul>

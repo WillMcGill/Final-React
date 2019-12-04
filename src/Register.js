@@ -48,19 +48,19 @@ class Register extends React.Component {
 
                         <div className="form-group autocomplete">
                             <label>Name
-                            <input type="name" name='name' className="form-control" id="nameExample" aria-describedby="nameHelp" placeholder="Enter name" onChange={this.handleChange} />
+                            <input type="name" name='name' autoComplete="off" className="form-control" id="nameExample" aria-describedby="nameHelp" placeholder="Enter name" onChange={this.handleChange} />
                             </label>
                         </div>
 
                         <div className="form-group autocomplete">
                             <label>Email address
-                            <input type="email" name='email' className="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="Enter email" onChange={this.handleChange} />
+                            <input type="email" name='email' autoComplete="off" className="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="Enter email" onChange={this.handleChange} />
                             </label>
                         </div>
 
                         <div className="form-group autocomplete">
                             <label>Password
-                            <input type="password" name='password' className="form-control" id="exampleInputPassword1" placeholder="Password" onChange={this.handleChange} />
+                            <input type="password" name='password' autoComplete="off" className="form-control" id="exampleInputPassword1" placeholder="Password" onChange={this.handleChange} />
                             </label>
                         </div>
                         <button type="submit" className="btn btn-primary" onSubmit={this.registerUser}>Submit</button>
