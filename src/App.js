@@ -29,7 +29,7 @@ class App extends React.Component {
   }
 
   clearRoutesNoToken(){
-    if (this.state.token == ''){
+    if (this.state.token === ''){
         localStorage.removeItem('routes')
     }
   }
@@ -57,10 +57,10 @@ class App extends React.Component {
 
         {this.state.page === 0 ?
           <><div className = "jumbotron h-100" id = "appbackground">
-            <div class="jumbotron jumbotron-fluid p-2 w-50 mx-auto" id = "appbanner">
-                    <div class="container">
-                        <h1 class="display-3">Sloper</h1>
-                        <p class="lead">Indoor Climbing Route Management</p>
+            <div className="jumbotron jumbotron-fluid p-2 w-50 mx-auto" id = "appbanner">
+                    <div className="container">
+                        <h1 className="display-3">Sloper</h1>
+                        <p className="lead">Indoor Climbing Route Management</p>
                         <p>Login or Register to Continue</p>
                     </div>
                 </div>

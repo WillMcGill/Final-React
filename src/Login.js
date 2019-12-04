@@ -27,10 +27,6 @@ class Login extends React.Component {
     handleSubmit(event){
         event.preventDefault();
 
-        var config = {
-            headers: {'Access-Control-Allow-Origin': '*'}
-        };
-
         
 
         Axios.post('https://sloper.appspot.com/api/login', this.state)
@@ -69,8 +65,8 @@ class Login extends React.Component {
                     </div>
 
                     <div className="form-group">
-                        <label for="exampleInputPassword1">Password
-                            <input type="password" name = 'password' className="form-control" id="exampleInputPassword1" placeholder="Password" onChange={this.handleChange} />
+                        <label for="exampleInputPassword2">Password
+                            <input type="password" name = 'password' className="form-control" id="exampleInputPassword2" placeholder="Password" onChange={this.handleChange} />
                         </label>
                     </div>
                         <button type="submit" className="btn btn-primary" onSubmit={this.handleSubmit}>Submit</button>

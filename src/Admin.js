@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 
@@ -94,10 +94,10 @@ class Admin extends React.Component {
 
     render() {
 
-        const tableData = this.state.data.map((item) => {
+        const tableData = this.state.data.map((item, idx) => {
 
             return (
-                <tr>
+                <tr key={idx}>
                     <td>{item.wall_location}</td>
                     <td>{item.type}</td>
                     <td>{item.difficulty}</td>

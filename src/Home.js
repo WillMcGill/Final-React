@@ -1,9 +1,8 @@
 import React from 'react';
 import Axios from 'axios';
 import './App.css';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label} from 'reactstrap';
 import ImageMapper from 'react-image-mapper';
-import { resetWarningCache } from 'prop-types';
 
 class Home extends React.Component {
 
@@ -128,7 +127,6 @@ class Home extends React.Component {
     autoUpdate() {
         setTimeout(() => {
             this.setState({ render: this.props.render })
-            console.log("timeout first")
             this.getActive();
             this.getRouteDetails();
         }, 1000)
@@ -143,17 +141,17 @@ class Home extends React.Component {
         return (
             <>
 
-                <div class="jumbotron jumbotron-fluid h-20" id = "homebanner">
-                    <div class="container">
-                        <h1 class="display-3">Welcome to Sloper</h1>
-                        <p class="lead">Click on the interactive map to view details or leave a comment below</p>
+                <div className="jumbotron jumbotron-fluid h-20" id = "homebanner">
+                    <div className="container">
+                        <h1 className="display-3">Welcome to Sloper</h1>
+                        <p className="lead">Click on the interactive map to view details or leave a comment below</p>
                     </div>
                 </div>
                 {this.props.render > this.state.render ? this.autoUpdate() : null}
                 {this.props.page <= 3 && this.state.routeData.length > 0 ?
                     
                     <div className="row">
-                        <div className="mx-auto">
+                        <div className="mx-auto mw-100">
 
 
                             <ImageMapper src={this.state.URL} map={

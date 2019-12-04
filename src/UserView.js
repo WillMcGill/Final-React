@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import './App.css';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 
@@ -46,7 +46,7 @@ class UserView extends React.Component {
         this.toggle()
 
         if (item) {
-            this.setState({ current: item.wall_location }, console.log(this.state))
+            this.setState({ current: item.wall_location })
         }
 
         else { this.updateComments() }
@@ -78,16 +78,16 @@ class UserView extends React.Component {
 
     render() {
 
-        const tableData = this.state.data.map((item) => {
+        const tableData = this.state.data.map((item, idx) => {
 
             return (
-                <tr>
+                <tr key={idx}>
                     <td>{item.wall_location}</td>
                     <td>{item.type}</td>
                     <td>{item.difficulty}</td>
                     <td>{item.set_date}</td>
                     <td>{item.expire_date}</td>
-                    <td><button id={item.id} type="button" class="btn btn-primary" onClick={e => this.onClick(e, item)}>Rate This Route</button></td>
+                    <td><button id={item.id} type="button" className="btn btn-primary" onClick={e => this.onClick(e, item)}>Rate This Route</button></td>
                 </tr>
             )
         });
@@ -102,9 +102,9 @@ class UserView extends React.Component {
                         <ModalBody>
                             <form onSubmit={this.handleSubmit}>
 
-                                <div class="form-group">
+                                <div className="form-group">
                                     <label for="exampleFormControlTextarea1">Leave A Comment</label>
-                                        <textarea class="form-control"  rows="3" name="comment" onChange ={this.handleChange}></textarea>
+                                        <textarea className="form-control"  rows="3" name="comment" onChange ={this.handleChange}></textarea>
                                 </div>
                                 <label>
                                     Rate the Route:

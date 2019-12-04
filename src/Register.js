@@ -54,7 +54,7 @@ class Register extends React.Component {
 
                         <div className="form-group">
                             <label for="exampleInputEmail1">Email address
-                            <input type="email" name='email' className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" onChange={this.handleChange} />
+                            <input type="email" name='email' className="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="Enter email" onChange={this.handleChange} />
                             </label>
                         </div>
 
