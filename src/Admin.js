@@ -48,7 +48,7 @@ class Admin extends React.Component {
         
         if(item)
         {
-        this.setState({current: item.wall_location}, console.log(this.state));
+        this.setState({current: item.wall_location});
         
         }
         else {this.updateDatabase()
