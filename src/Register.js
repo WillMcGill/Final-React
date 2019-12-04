@@ -46,20 +46,20 @@ class Register extends React.Component {
                     <form onSubmit={this.handleSubmit}>
                         <h1>Register</h1>
 
-                        <div className="form-group">
-                            <label for="exampleInputEmail1">Name
+                        <div className="form-group autocomplete">
+                            <label>Name
                             <input type="name" name='name' className="form-control" id="nameExample" aria-describedby="nameHelp" placeholder="Enter name" onChange={this.handleChange} />
                             </label>
                         </div>
 
-                        <div className="form-group">
-                            <label for="exampleInputEmail1">Email address
+                        <div className="form-group autocomplete">
+                            <label>Email address
                             <input type="email" name='email' className="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="Enter email" onChange={this.handleChange} />
                             </label>
                         </div>
 
-                        <div className="form-group">
-                            <label for="exampleInputPassword1">Password
+                        <div className="form-group autocomplete">
+                            <label>Password
                             <input type="password" name='password' className="form-control" id="exampleInputPassword1" placeholder="Password" onChange={this.handleChange} />
                             </label>
                         </div>

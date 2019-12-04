@@ -49,16 +49,16 @@ class Navbar extends React.Component {
                             <div className="collapse navbar-collapse" id="navbarSupportedContent" />
                             <ul className="navbar-nav mx-auto">
 
-                            {this.props.page === 0 ?
+                            {/* {this.props.page === 0 ?
                                 <>
-                                    <a className="nav-item nav-link" onClick={this.goHome}>Home</a>
-                                    <a className="nav-item nav-link" onClick={this.logIn}>Log In</a>
-                                    <a className="nav-item nav-link" onClick={this.regNewUser}>Register</a>
+                                   <a className="nav-item nav-link" onClick={this.goHome} href ="#">Home</a>
+                                   <a className="nav-item nav-link" onClick={this.logIn} href ="#">Log In</a>
+                                   <a className="nav-item nav-link" onClick={this.regNewUser} href ="#">Register</a>
                                 </>
-                            : null}
+                            : null} */}
 
                             {this.props.page > 1 ?
-                                <a className="nav-item nav-link" onClick={this.logOut}>Logout</a>
+                                <a className="nav-item nav-link" onClick={this.logOut} href ="#">Logout</a>
                             : null}
                         </ul>
                     </ul>

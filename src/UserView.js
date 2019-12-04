@@ -103,7 +103,7 @@ class UserView extends React.Component {
                             <form onSubmit={this.handleSubmit}>
 
                                 <div className="form-group">
-                                    <label for="exampleFormControlTextarea1">Leave A Comment</label>
+                                    <label>Leave A Comment</label>
                                         <textarea className="form-control"  rows="3" name="comment" onChange ={this.handleChange}></textarea>
                                 </div>
                                 <label>

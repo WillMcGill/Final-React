@@ -103,7 +103,7 @@ class Admin extends React.Component {
                     <td>{item.difficulty}</td>
                     <td>{item.set_date}</td>
                     <td>{item.expire_date}</td>
-                    <td><button id={item.id} type="button" class="btn btn-danger" onClick={
+                    <td><button id={item.id} type="button" className="btn btn-danger" onClick={
                         e => this.onClick(e, item)
                     }>Update Route</button></td>
                 </tr>

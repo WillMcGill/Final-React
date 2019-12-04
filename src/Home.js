@@ -151,9 +151,9 @@ class Home extends React.Component {
                 {this.props.page <= 3 && this.state.routeData.length > 0 ?
                     
                     <div className="row">
-                        <div className="mx-auto mw-100">
-
-
+                        
+                        <div className="mx-auto">
+                            
                             <ImageMapper src={this.state.URL} map={
                                 {
                                     name: "my-map",
@@ -169,6 +169,7 @@ class Home extends React.Component {
                             />
 
                             </div>
+                            
                             {
                                 this.state.hoveredArea &&
                                 <span className="tooltip"

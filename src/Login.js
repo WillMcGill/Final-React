@@ -58,14 +58,14 @@ class Login extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <h1>Login</h1>
 
-                    <div className="form-group">
-                        <label for="exampleInputEmail1">Email address
+                    <div className="form-group autocomplete">
+                        <label >Email address
                             <input type="email" name = 'email' className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" onChange={this.handleChange} />
                         </label>
                     </div>
 
-                    <div className="form-group">
-                        <label for="exampleInputPassword2">Password
+                    <div className="form-group autocomplete">
+                        <label >Password
                             <input type="password" name = 'password' className="form-control" id="exampleInputPassword2" placeholder="Password" onChange={this.handleChange} />
                         </label>
                     </div>
